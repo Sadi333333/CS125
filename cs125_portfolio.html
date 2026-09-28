@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS 125 | Sadi's Website</title>
+<style>
+:root{--navy:#03152d;--navy2:#062344;--panel:#082b4f;--panel2:#0b3560;--blue:#38a9ff;--blue2:#91d6ff;--white:#f6fbff;--muted:#b9cde2;--line:rgba(110,194,255,.28);--success:#53c8ff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at 70% 0,#0d3c6d 0,#061b35 38%,#020d1d 100%);color:var(--white);min-height:100vh;line-height:1.55}.page{min-height:100vh;padding:0 34px 50px 86px}.topbar{height:76px;display:flex;align-items:center;justify-content:space-between;max-width:1280px;margin:auto;border-bottom:1px solid var(--line)}.brand{font-weight:900;font-size:1.2rem;letter-spacing:.04em;color:var(--blue)}.brand span{color:var(--blue)}.topright{color:var(--muted);font-size:.9rem}.menu-btn{position:fixed;left:18px;top:16px;z-index:30;width:50px;height:50px;border:1px solid var(--line);border-radius:14px;background:#092c50;color:#fff;font-size:25px;cursor:pointer;box-shadow:0 10px 30px #0007}.menu-btn:hover{border-color:var(--blue);color:var(--blue2)}
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:320px;background:rgba(2,17,35,.985);border-right:1px solid var(--line);z-index:25;padding:88px 18px 22px;transform:translateX(-105%);transition:.3s ease;box-shadow:20px 0 55px #0009;overflow:auto}.sidebar.open{transform:translateX(0)}.close{position:absolute;right:18px;top:17px;border:0;background:none;color:#fff;font-size:28px;cursor:pointer}.side-title{font-weight:900;font-size:1.1rem;color:var(--blue2);margin:0 10px 18px}.nav{display:grid;gap:5px}.nav button{background:transparent;border:0;color:#dcecff;text-align:left;padding:10px 12px;min-height:42px;display:flex;align-items:center;line-height:1.2;border-radius:9px;font-size:.94rem;cursor:pointer}.nav button:hover,.nav button.active{background:#0b3157;color:#fff}.nav small{display:block;color:#6f91af;margin:17px 10px 5px;text-transform:uppercase;letter-spacing:.12em;font-size:.7rem}.side-assignments{border-top:1px solid var(--line);margin-top:12px;padding-top:12px}.side-note{color:#8fa9c1;font-size:.78rem;line-height:1.5;padding:10px 8px}.overlay{position:fixed;inset:0;background:#0008;z-index:20;display:none}.overlay.show{display:block}
+main{max-width:1280px;margin:0 auto}.section{display:none;padding:42px 0}.section.active{display:block;animation:fade .28s ease}@keyframes fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}.hero{min-height:58vh;display:flex;align-items:center;padding:36px 0 24px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;right:-80px;top:70px;width:56%;height:70%;background:linear-gradient(135deg,transparent 0 35%,rgba(56,169,255,.08) 35% 36%,transparent 36% 50%,rgba(56,169,255,.05) 50% 51%,transparent 51%);pointer-events:none}.hero-content{max-width:820px;position:relative;z-index:1}.eyebrow{color:var(--blue);font-weight:900;letter-spacing:.16em;text-transform:uppercase;font-size:.8rem}.hero h1{font-size:clamp(3.2rem,7vw,6.4rem);line-height:.94;margin:16px 0 24px;letter-spacing:-.055em}.hero h1 span{color:var(--blue)}.hero p{max-width:760px;color:var(--muted);font-size:1.12rem}.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{border:1px solid var(--line);background:#0b3157;color:#fff;padding:11px 18px;border-radius:10px;cursor:pointer;font-weight:800}.btn.primary{background:var(--blue);color:#02172c;border-color:var(--blue)}.btn:hover{transform:translateY(-1px)}
+.map-cta{position:relative;display:inline-flex;align-items:center;gap:11px;padding:12px 18px 12px 14px;border:1px solid rgba(145,214,255,.55);border-radius:14px;background:linear-gradient(135deg,#0b3157,#0a416d);color:#f6fbff;box-shadow:0 8px 24px rgba(0,0,0,.22),inset 0 0 0 1px rgba(255,255,255,.035);overflow:hidden}
+.map-cta .map-cta-text{display:flex;flex-direction:column;align-items:flex-start;line-height:1.05}
+.map-cta .map-cta-title{font-size:.88rem;font-weight:900;letter-spacing:.02em}
+.map-cta .map-cta-sub{font-size:.7rem;color:#b9d8ee;margin-top:4px;font-weight:600}
+.map-cta .map-cta-arrow{margin-left:auto;color:#91d6ff;font-size:1.15rem;transition:.2s}
+.map-cta:hover{border-color:#38a9ff;background:linear-gradient(135deg,#0e3a64,#0b4a7a);box-shadow:0 12px 28px rgba(0,0,0,.3),0 0 0 1px rgba(56,169,255,.16);transform:translateY(-2px)}
+.map-cta:hover .map-cta-arrow{transform:translateX(3px)}
+.section-title{font-size:2.6rem;line-height:1.1;margin:0}.subtitle{color:var(--muted);margin:8px 0 25px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:16px}.card{background:linear-gradient(145deg,rgba(9,48,84,.92),rgba(4,28,53,.92));border:1px solid var(--line);border-radius:17px;padding:23px;box-shadow:0 12px 35px #0003}.card h3{margin:0 0 7px;color:var(--blue2)}.card p{color:#c6d7e9;margin:0}.tile{min-height:170px;display:flex;flex-direction:column;justify-content:flex-end;cursor:pointer;transition:.2s}.tile:hover{transform:translateY(-3px);border-color:var(--blue)}.tile .icon{font-size:2rem;color:var(--blue);margin-bottom:auto}.tag{display:inline-block;border:1px solid #317fb5;color:var(--blue2);padding:3px 8px;border-radius:999px;font-size:.72rem;margin:3px}
+
+
+/* Projects */
+.project-feature{margin-top:20px;border:1px solid rgba(145,214,255,.42);border-radius:22px;overflow:hidden;background:linear-gradient(145deg,rgba(11,53,91,.98),rgba(4,28,53,.98));box-shadow:0 18px 48px rgba(0,0,0,.28)}
+.project-feature-top{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:26px 28px 18px;border-bottom:1px solid rgba(145,214,255,.18)}
+.project-kicker{display:inline-flex;align-items:center;gap:8px;color:#91d6ff;font-size:.74rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase}
+.project-status{border:1px solid rgba(83,200,255,.52);background:rgba(56,169,255,.1);color:#ccecff;border-radius:999px;padding:6px 11px;font-size:.72rem;font-weight:900;letter-spacing:.06em}
+.project-feature-body{display:grid;grid-template-columns:1.15fr .85fr;gap:0}
+.project-copy{padding:28px}
+.project-copy h3{margin:0 0 10px;font-size:2rem;color:#f6fbff}
+.project-copy p{margin:0;color:#bfd2e6;max-width:720px}
+.project-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.project-meta span{padding:6px 10px;border-radius:999px;border:1px solid rgba(110,194,255,.28);background:#062344;color:#bfe4fb;font-size:.74rem;font-weight:800}
+.project-side{padding:28px;background:linear-gradient(180deg,rgba(9,49,84,.55),rgba(6,35,64,.28));border-left:1px solid rgba(145,214,255,.16);display:flex;flex-direction:column;justify-content:center}
+.project-side h4{margin:0 0 10px;color:#91d6ff;font-size:1rem}
+.project-side ul{margin:0;padding-left:18px;color:#c6d9ea}
+.project-side li{margin:8px 0}
+.project-note{margin-top:18px;color:#91aac2;font-size:.82rem}
+@media (max-width:760px){.project-feature-body{grid-template-columns:1fr}.project-side{border-left:0;border-top:1px solid rgba(145,214,255,.16)}.project-feature-top{align-items:flex-start;flex-direction:column}}
+
+/* About Me */
+.about-hero{padding:30px 32px;margin-bottom:16px;background:linear-gradient(145deg,rgba(10,53,92,.96),rgba(4,27,51,.96));}
+.edu-campus-banner{
+  margin-bottom:16px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+  background:#061f3a;
+  box-shadow:0 12px 35px #0003;
+}
+.edu-campus-banner img{
+  display:block;
+  width:100%;
+  height:270px;
+  object-fit:cover;
+}
+.edu-campus-caption{
+  padding:10px 14px;
+  color:#a9c1d9;
+  font-size:.72rem;
+  letter-spacing:.02em;
+}
+.edu-image-card{
+  display:grid;
+  grid-template-columns:190px minmax(0,1fr);
+  gap:18px;
+  align-items:stretch;
+}
+.edu-image-card .edu-photo-credit{font-size:.72rem;color:#b9d8ff;margin-top:6px;line-height:1.3}
+.edu-photo{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:13px;
+  border:1px solid rgba(145,214,255,.22);
+  background:#0a2948;
+}
+ .edu-logo-wrap{background:transparent;border-color:rgba(145,214,255,.22);display:flex;align-items:center;justify-content:center}
+.caldwell-wordmark{display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:.92;text-align:center;min-height:120px;padding:10px}.caldwell-wordmark .cw-caldwell{font-size:1.6rem;font-weight:1000;letter-spacing:.12em;color:#c8102e;text-transform:uppercase;text-shadow:0 1px 0 rgba(0,0,0,.2)}.caldwell-wordmark .cw-university{font-size:.78rem;font-weight:900;letter-spacing:.2em;color:#fff;text-transform:uppercase;margin-top:8px}.caldwell-wordmark .cw-rule{width:74px;height:3px;background:#c8102e;border-radius:4px;margin-top:10px}
+.edu-titans-mark{display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;background:linear-gradient(145deg,#0b0b0d,#171719) !important;border-color:rgba(215,180,74,.35);color:#fff}
+.titans-wordmark{font-size:1.7rem;font-weight:1000;letter-spacing:.18em;color:#d7b44a;text-shadow:2px 2px 0 #000;margin-top:2px}
+.titans-sub{font-size:.62rem;font-weight:800;letter-spacing:.2em;color:#fff;margin-top:7px}
+.edu-image-card .edu-copy{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+@media(max-width:760px){
+  .edu-campus-banner img{height:190px}
+  .edu-image-card{grid-template-columns:1fr}
+  .edu-image-card .edu-photo,.edu-logo-wrap{height:185px}
+}
+.education-list{display:grid;gap:15px;margin-bottom:15px}.edu-landscape{display:grid;grid-template-columns:36% minmax(0,1fr);gap:22px;align-items:center;min-height:190px;overflow:hidden}.edu-visual{min-height:170px;height:100%;border-radius:14px;border:1px solid rgba(145,214,255,.22)}.edu-landscape .edu-copy{padding:22px 22px 22px 0}.edu-landscape .edu-copy h3{margin:6px 0 8px;color:var(--blue2);font-size:1.35rem}.edu-landscape .edu-copy p{margin:0;color:#c6d7e9}.edu-stats{display:grid;grid-template-columns:1fr;gap:12px;margin-top:4px}.edu-stat{display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:4px 0 10px;border-bottom:1px solid rgba(145,214,255,.12)}.edu-stat:last-child{border-bottom:none}.edu-stat-label{color:var(--blue);font-size:.74rem;font-weight:900;letter-spacing:.16em;line-height:1.05}.edu-stat strong{color:#f6fbff;font-size:1.05rem;line-height:1.1}.edu-stat strong + strong{margin-top:0}@media(max-width:760px){.edu-landscape{grid-template-columns:1fr}.edu-visual{min-height:180px}.edu-stats{grid-template-columns:1fr}}
+.about-kicker{color:var(--blue);font-size:.76rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+.about-intro{color:#cfe0ef;font-size:1.08rem;max-width:930px;margin:14px 0 0}.about-intro strong{color:var(--blue2)}
+.about-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-bottom:16px}.about-card{min-height:165px;position:relative;overflow:hidden}.about-card h3{margin:0 0 7px;color:var(--blue2);font-size:1.05rem}.about-card p{color:#c6d7e9;margin:0}.about-icon{font-size:1.65rem;margin-bottom:16px;display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:12px;background:rgba(56,169,255,.09);border:1px solid rgba(145,214,255,.18)}.about-wide{grid-column:1 / -1;display:flex;gap:18px;align-items:flex-start}.about-wide .about-icon{flex:0 0 auto}.about-next{background:linear-gradient(145deg,rgba(7,38,68,.96),rgba(4,24,45,.96));border-color:rgba(145,214,255,.2)}.about-next h3{margin:10px 0 6px;color:var(--white);font-size:1.2rem}.about-next p{margin:0;color:#b9cde2;max-width:900px}
+@media(max-width:760px){.about-grid{grid-template-columns:1fr}.about-wide{grid-column:auto;display:block}.about-hero{padding:24px}.about-card{min-height:0}}
+
+/* Assignment dashboard */
+.assignment-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:22px}.assignment-count{border:1px solid var(--line);background:#08294a;border-radius:999px;padding:7px 13px;color:var(--blue2);font-size:.8rem}.assignment-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}.assignment{position:relative;min-height:160px;padding:17px;border:1px solid var(--line);border-radius:15px;background:linear-gradient(145deg,#092f55,#051d36);cursor:pointer;transition:.2s}.assignment:hover{border-color:var(--blue);transform:translateY(-2px)}.date{display:inline-block;background:#0e5590;border-radius:999px;padding:3px 9px;font-weight:900;font-size:.78rem;color:#fff;margin-bottom:11px}.assignment h3{font-size:.98rem;margin:0 0 4px;line-height:1.25}.lab{color:var(--blue2);font-size:.8rem}.status{position:absolute;bottom:13px;left:17px;color:#82a7c4;font-size:.73rem}.status.complete{color:#7ed9ff}.status.closed{color:#9aafc3}.status.wip{color:#d5dbe1}.status:before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:currentColor;margin-right:7px}.assignment.wip{background:linear-gradient(145deg,rgba(18,20,22,.94),rgba(6,8,10,.96)),repeating-linear-gradient(135deg,rgba(255,255,255,.045) 0 8px,transparent 8px 16px)}.assignment.wip:after{content:"";position:absolute;inset:0;border-radius:15px;opacity:.18;pointer-events:none;background:repeating-linear-gradient(135deg,#fff 0 7px,transparent 7px 15px)}.assignment.wip h3,.assignment.wip .lab{position:relative;z-index:1}.assignment.wip .date{background:#32383d}.assignment.closed{opacity:.78;background:#17283a}
+/* Dashboard */.dashboard{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:8px}.dash-card{min-height:155px}.dash-card h3{font-size:1.05rem}.dash-card .arrow{color:var(--blue);font-size:1.25rem}.highlights{margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:15px}.highlight{border:1px solid var(--line);border-radius:15px;background:#08294a;padding:18px}.highlight strong{color:var(--blue2)}
+/* Site map */
+.map-wrap{margin-top:28px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,#061f3a,#04182d);padding:30px 30px 110px;box-shadow:inset 0 0 35px rgba(56,169,255,.035)}
+.zigzag-map{max-width:700px;margin:8px auto 0;display:block}
+.zigzag-svg{display:block;width:100%;height:auto;overflow:visible}
+.zigzag-svg .map-connector{stroke:#fff;stroke-width:2.4;stroke-linecap:round;fill:none}
+.zigzag-svg .map-node{fill:#0d355c;stroke:#f6fbff;stroke-width:1.8;cursor:pointer;transition:stroke .2s ease,filter .2s ease,transform .2s ease;transform-box:fill-box;transform-origin:center}
+@keyframes nodePulse{0%,100%{stroke:#f6fbff}50%{stroke:#38a9ff}}
+.zigzag-svg .map-node:hover{animation:nodePulse 1s ease-in-out infinite;stroke:#f6fbff;filter:drop-shadow(0 0 9px rgba(56,169,255,.8));transform:scale(1.06)}
+
+.zigzag-svg .map-label{fill:#f7fbff;font:900 3px Inter,Arial,sans-serif;text-anchor:middle;dominant-baseline:middle;pointer-events:none}
+@media(max-width:700px){.map-wrap{padding:22px 12px}.zigzag-svg .map-label{font-size:3px}.zigzag-svg .map-connector{stroke-width:3.1}}
+
+
+/* AI page spacing */
+.ai-page{padding-top:4px;padding-bottom:0}
+.ai-page .wip-panel{margin-top:6px;min-height:250px}
+.page.ai-view,.page.compact-view{min-height:0;padding-bottom:0}
+.page.ai-view .ai-page,.page.compact-view .ai-page{padding-bottom:0}
+.page.ai-view .footer,.page.compact-view .footer{margin-top:14px;padding-bottom:2px}
+.page.compact-view #assignment-detail{padding-top:4px;padding-bottom:0}
+.page.compact-view #assignment-detail #assignmentDetailContent{margin-top:10px!important}
+.page.compact-view #assignment-detail .card{margin-top:0}
+
+/* AI Assistant */
+.ai-chat-bubble{position:fixed;right:24px;bottom:24px;width:58px;height:58px;border-radius:50%;border:1px solid rgba(145,214,255,.72);background:linear-gradient(145deg,#0d4f7d,#08345d);color:#f6fbff;display:flex;align-items:center;justify-content:center;font-size:1.45rem;cursor:pointer;z-index:40;box-shadow:0 10px 28px rgba(0,0,0,.35),0 0 20px rgba(56,169,255,.12);transition:.2s ease}
+.ai-chat-bubble:hover{transform:translateY(-2px) scale(1.03);border-color:var(--blue);box-shadow:0 14px 32px rgba(0,0,0,.42),0 0 22px rgba(56,169,255,.24)}
+.ai-chat-window{position:fixed;right:24px;bottom:92px;width:min(360px,calc(100vw - 30px));height:470px;background:rgba(4,20,38,.985);border:1px solid rgba(145,214,255,.35);border-radius:18px;z-index:39;box-shadow:0 24px 70px rgba(0,0,0,.5);display:none;overflow:hidden;backdrop-filter:blur(10px)}
+.ai-chat-window.open{display:flex;flex-direction:column;animation:chatIn .18s ease}@keyframes chatIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+.ai-chat-head{padding:13px 15px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,#0b3157,#082844)}
+.ai-chat-title{display:flex;align-items:center;gap:10px}.ai-avatar{width:32px;height:32px;border-radius:10px;background:#0e568d;border:1px solid rgba(145,214,255,.45);display:flex;align-items:center;justify-content:center}.ai-chat-name{font-weight:900;font-size:.9rem}.ai-chat-status{color:#8fc7ea;font-size:.68rem}.ai-chat-close{border:0;background:none;color:#bdd3e7;font-size:1.2rem;cursor:pointer}
+.ai-chat-messages{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px}.ai-msg{max-width:84%;padding:10px 12px;border-radius:13px;font-size:.82rem;line-height:1.45}.ai-msg.bot{align-self:flex-start;background:#0a3155;color:#e8f4ff;border:1px solid rgba(145,214,255,.12)}.ai-msg.user{align-self:flex-end;background:#38a9ff;color:#03152d;font-weight:700}
+.ai-chat-quick{display:flex;flex-wrap:wrap;gap:7px;padding:0 14px 10px}.ai-chip{border:1px solid rgba(145,214,255,.3);background:#092a49;color:#cfe9fb;border-radius:999px;padding:6px 9px;font-size:.68rem;cursor:pointer}.ai-chip:hover{border-color:var(--blue);color:#fff}
+.ai-chat-input{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);background:#051b32}.ai-chat-input input{flex:1;min-width:0;background:#0a2945;border:1px solid rgba(145,214,255,.2);border-radius:11px;color:#fff;padding:10px 11px;outline:none}.ai-chat-input input:focus{border-color:var(--blue)}.ai-chat-send{border:1px solid var(--blue);background:var(--blue);color:#02172c;border-radius:11px;padding:0 13px;font-weight:900;cursor:pointer}
+@media(max-width:700px){.ai-chat-bubble{right:16px;bottom:16px}.ai-chat-window{right:15px;bottom:86px}}
+/* WIP */.wip-panel{position:relative;overflow:hidden;min-height:340px;border:1px solid #78838b;border-radius:20px;background:#15181b;color:#f2f4f5;padding:35px;display:flex;align-items:center}.wip-panel:before{content:"";position:absolute;inset:-30%;opacity:.13;background:repeating-linear-gradient(135deg,#fff 0 18px,transparent 18px 36px)}.wip-inner{position:relative;z-index:1;max-width:680px}.wip-label{display:inline-block;background:#fff;color:#111;padding:5px 10px;font-weight:900;letter-spacing:.08em;font-size:.72rem}.wip-panel h3{font-size:2.2rem;margin:14px 0 8px}.wip-panel p{color:#c8cdd1}.empty-note{color:#9aa4ab}
+/* Skills */.skills-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:8px}.skill-card{background:linear-gradient(145deg,rgba(9,48,84,.95),rgba(4,28,53,.94));border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 12px 35px #0003;min-height:205px;position:relative;overflow:hidden}.skill-card:before{content:"";position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,var(--blue),transparent)}.skill-top{display:flex;align-items:center;gap:12px;margin-bottom:14px}.skill-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(56,169,255,.1);border:1px solid rgba(145,214,255,.22);color:var(--blue2);font-size:1.45rem}.skill-card h3{margin:0;color:var(--blue2);font-size:1.1rem}.skill-card p{margin:0 0 14px;color:#b9cde2;font-size:.92rem}.skill-tags{display:flex;flex-wrap:wrap;gap:7px}.skill-tags span{display:inline-flex;align-items:center;border:1px solid rgba(145,214,255,.22);background:rgba(4,24,45,.62);color:#dcecff;border-radius:999px;padding:6px 10px;font-size:.78rem;font-weight:700}.skills-note{margin-top:16px;border:1px solid rgba(145,214,255,.18);border-radius:14px;background:linear-gradient(145deg,rgba(7,38,68,.9),rgba(4,24,45,.9));padding:16px 18px;color:#c6d7e9}.skills-note strong{color:var(--blue2)}@media(max-width:760px){.skills-grid{grid-template-columns:1fr}}
+.assignment-instructions{display:grid;gap:14px;margin-top:10px}.info-row{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;padding:18px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(145deg,#092f55,#051d36)}.info-row strong{display:block;color:#fff}.info-row span{display:block;color:#9fc2db;margin-top:5px;font-size:.88rem}.detail-copy{color:#c9d8e7;line-height:1.65;margin:7px 0 0}.detail-list{color:#d5e4f2;line-height:1.8;margin:10px 0 0;padding-left:22px}.card-lite{border:1px solid var(--line);border-radius:15px;background:linear-gradient(145deg,rgba(9,48,84,.82),rgba(4,28,53,.88));padding:20px}.card-lite h3{margin:0 0 8px;color:var(--blue2)}.footer{margin-top:50px;text-align:center;color:#64839f;font-size:.82rem;border-top:1px solid var(--line);padding-top:23px}
+@media(max-width:1000px){.assignment-grid{grid-template-columns:repeat(3,1fr)}.dashboard{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){.page{padding:0 18px 40px 70px}.topright{display:none}.assignment-grid{grid-template-columns:1fr}.dashboard{grid-template-columns:1fr}.highlights{grid-template-columns:1fr}.hero h1{font-size:3.3rem}.sidebar{width:285px}}
+
+/* Security interactive page */
+.security-hero{padding:26px 28px;margin-bottom:18px}.security-hero-row{display:flex;align-items:center;justify-content:space-between;gap:24px}.security-hero-row .about-intro{max-width:760px;margin-bottom:0}.quiz-launch{border:1px solid rgba(145,214,255,.65);background:linear-gradient(135deg,#0f4c7f,#0a3157);color:#fff;padding:13px 18px;border-radius:12px;font-weight:900;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,.22);white-space:nowrap}.quiz-launch:hover{transform:translateY(-2px);border-color:var(--blue)}
+.security-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:8px 0 16px}.security-tab{min-height:84px;border:1px solid rgba(145,214,255,.18);background:#082b4f;color:#bcd5e9;padding:12px 14px;border-radius:15px;cursor:pointer;font-weight:900;transition:.2s;display:flex;align-items:center;justify-content:center;text-align:center;font-size:.92rem}.security-tab:hover{color:#fff;transform:translateY(-2px)}.security-tab.active{color:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.08) inset,0 10px 22px rgba(0,0,0,.18)}.security-tab[data-security-tab="watch"]{background:linear-gradient(145deg,#4a2025,#2b1820);border-color:#d65a63;color:#ffd9dc}.security-tab[data-security-tab="watch"].active{background:linear-gradient(145deg,#6b2831,#421c23);border-color:#ff737c}.security-tab[data-security-tab="protect"]{background:linear-gradient(145deg,#123f31,#102a24);border-color:#4fbe8d;color:#c9f4de}.security-tab[data-security-tab="protect"].active{background:linear-gradient(145deg,#185640,#12382e);border-color:#71e7ad}.security-tab[data-security-tab="ethics"]{background:linear-gradient(145deg,#493718,#302817);border-color:#d6ad54;color:#fae9bf}.security-tab[data-security-tab="ethics"].active{background:linear-gradient(145deg,#65501f,#443515);border-color:#f2cd73}.security-panel{background:linear-gradient(145deg,rgba(9,48,84,.94),rgba(4,28,53,.94));border:1px solid var(--line);border-radius:18px;padding:24px;min-height:330px}.security-panel[data-security-panel="watch"]{background:linear-gradient(145deg,rgba(84,25,31,.96),rgba(35,20,27,.96));border-color:rgba(214,90,99,.45)}.security-panel[data-security-panel="protect"]{background:linear-gradient(145deg,rgba(17,67,52,.96),rgba(10,31,27,.96));border-color:rgba(79,190,141,.45)}.security-panel[data-security-panel="ethics"]{background:linear-gradient(145deg,rgba(74,55,22,.96),rgba(35,29,18,.96));border-color:rgba(214,173,84,.45)}.security-panel[hidden],.security-quiz[hidden]{display:none}.security-panel-head{display:flex;align-items:center;gap:14px;margin-bottom:20px}.security-panel-icon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:#0b3157;border:1px solid rgba(145,214,255,.22);font-size:1.5rem}.security-panel[data-security-panel="watch"] .security-panel-icon{background:#5b232b;border-color:rgba(255,115,124,.35)}.security-panel[data-security-panel="protect"] .security-panel-icon{background:#154a39;border-color:rgba(113,231,173,.35)}.security-panel[data-security-panel="ethics"] .security-panel-icon{background:#4d3918;border-color:rgba(242,205,115,.35)}.security-panel-head h3{margin:0;color:#f6fbff;font-size:1.45rem}.security-panel-head p{margin:4px 0 0;color:#d0dceb}.security-topic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.security-topic{padding:17px;border:1px solid rgba(145,214,255,.17);background:rgba(4,25,47,.56);border-radius:14px;min-height:145px}.security-panel[data-security-panel="watch"] .security-topic{background:rgba(33,14,18,.45);border-color:rgba(255,115,124,.16)}.security-panel[data-security-panel="protect"] .security-topic{background:rgba(7,31,24,.4);border-color:rgba(113,231,173,.16)}.security-panel[data-security-panel="ethics"] .security-topic{background:rgba(33,27,12,.42);border-color:rgba(242,205,115,.16)}.security-topic>span{font-size:1.45rem}.security-topic h4{margin:7px 0 5px;color:#91d6ff}.security-panel[data-security-panel="watch"] .security-topic h4{color:#ff9ca3}.security-panel[data-security-panel="protect"] .security-topic h4{color:#8ff0bf}.security-panel[data-security-panel="ethics"] .security-topic h4{color:#f5d98b}.security-topic p{margin:0;color:#d0d9e4;font-size:.93rem}.security-quiz{margin-top:18px;border:1px solid rgba(145,214,255,.28);border-radius:18px;padding:22px;background:linear-gradient(145deg,rgba(8,39,69,.97),rgba(3,20,38,.97));box-shadow:0 18px 48px rgba(0,0,0,.25)}.quiz-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px}.quiz-head h3{margin:6px 0 6px;color:#fff;font-size:1.7rem}.quiz-head p{margin:0;color:#b9cadb;max-width:760px}.quiz-board{margin-top:18px}.quiz-targets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.quiz-target{border:1px solid rgba(145,214,255,.2);background:#062847;border-radius:15px;padding:14px;min-height:190px;transition:.16s}.quiz-target.good{background:rgba(39,151,91,.16);border-color:#4fe18b}.quiz-target.bad{background:rgba(188,55,55,.17);border-color:#ff6767}.quiz-target-title{font-weight:950;color:#dff3ff}.quiz-target>p{font-size:.74rem;color:#8fb0c9;margin:4px 0 10px}.target-dropzone{min-height:112px;display:flex;flex-direction:column;gap:7px}.quiz-chip{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:8px 11px;border-radius:10px;border:1px solid rgba(145,214,255,.28);background:#0a355d;color:#eff8ff;font-size:.78rem;font-weight:800;cursor:grab;user-select:none;box-shadow:0 4px 10px rgba(0,0,0,.18);touch-action:none}.quiz-chip:active{cursor:grabbing}.quiz-chip.correct{background:#1b7a49;border-color:#62ef9b}.quiz-chip.wrong{background:#a13f42;border-color:#ff7b7b}.quiz-tray-wrap{margin-top:17px;padding:14px;border:1px dashed rgba(145,214,255,.3);border-radius:14px;background:rgba(2,14,27,.6)}.quiz-tray-label{font-size:.7rem;letter-spacing:.16em;color:#7fa2bc;font-weight:900;margin-bottom:10px}.quiz-tray{display:flex;flex-wrap:wrap;gap:9px;min-height:48px}.quiz-result{min-height:22px;margin-top:12px;color:#9fc2db;font-weight:750}.quiz-result.done{color:#69e79e}.screen-shake{animation:screenShake .72s ease}.quiz-drop-fall{animation:dropToTray .72s cubic-bezier(.2,.75,.3,1) both}.confetti-piece{position:fixed;top:-28px;left:var(--x);width:var(--w);height:var(--h);background:var(--c);border-radius:var(--r);pointer-events:none;z-index:99999;opacity:0;animation:confettiFall var(--duration) linear var(--delay) forwards}.confetti-piece:nth-child(3n){transform:rotate(20deg)}.confetti-piece:nth-child(3n+1){transform:rotate(-18deg)}.confetti-piece:nth-child(3n+2){transform:rotate(8deg)}@keyframes screenShake{0%,100%{transform:translateX(0)}12%{transform:translateX(-7px)}24%{transform:translateX(7px)}36%{transform:translateX(-6px)}48%{transform:translateX(6px)}60%{transform:translateX(-4px)}72%{transform:translateX(4px)}84%{transform:translateX(-2px)}}@keyframes dropToTray{0%{transform:translateY(-170px) scale(.95);opacity:.35}70%{transform:translateY(10px) scale(1.02);opacity:1}100%{transform:translateY(0) scale(1)}}@keyframes confettiFall{0%{opacity:0;transform:translate3d(0,-40px,0) rotate(0deg)}8%{opacity:1}100%{opacity:.1;transform:translate3d(var(--drift),calc(100vh + 90px),0) rotate(var(--spin))}}
+@media(max-width:880px){.quiz-targets{grid-template-columns:repeat(2,minmax(0,1fr))}.security-topic-grid{grid-template-columns:1fr}.security-hero-row{flex-direction:column;align-items:flex-start}}@media(max-width:560px){.quiz-targets{grid-template-columns:1fr}.security-tabs{display:grid;grid-template-columns:1fr 1fr}.quiz-head{flex-direction:column}}
+
+/* Assignment 2 interactive reflection */
+.reflection-shell{margin-top:16px;border:1px solid rgba(145,214,255,.35);border-radius:20px;background:linear-gradient(145deg,rgba(8,44,77,.98),rgba(4,25,47,.98));padding:22px;box-shadow:0 18px 44px rgba(0,0,0,.24);overflow:hidden}
+.reflection-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:16px}
+.reflection-head h3{margin:0;color:#f6fbff;font-size:1.35rem}
+.reflection-head p{margin:5px 0 0;color:#a9c4da;font-size:.9rem}
+.reflection-progress{min-width:180px;padding:11px 13px;border:1px solid rgba(145,214,255,.24);border-radius:12px;background:rgba(3,21,45,.45)}
+.reflection-progress-top{display:flex;justify-content:space-between;gap:12px;color:#dff2ff;font-size:.75rem;font-weight:800;margin-bottom:7px}
+.reflection-progress-track{height:7px;border-radius:999px;background:#0a2038;overflow:hidden}
+.reflection-progress-fill{height:100%;width:0;background:linear-gradient(90deg,#38a9ff,#91d6ff);border-radius:999px;transition:width .35s ease}
+.reflection-actions{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px}
+.reflection-action{border:1px solid rgba(145,214,255,.28);background:#082f55;color:#dff3ff;border-radius:10px;padding:8px 11px;font-size:.76rem;font-weight:900;cursor:pointer}
+.reflection-action:hover{border-color:#38a9ff;background:#0a3a66}
+.reflection-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.reflection-q{position:relative;border:1px solid rgba(145,214,255,.18);border-radius:16px;background:linear-gradient(145deg,rgba(9,48,84,.82),rgba(3,24,44,.86));padding:17px;transition:.2s;cursor:pointer;overflow:hidden}
+.reflection-q:hover{transform:translateY(-2px);border-color:rgba(56,169,255,.65);box-shadow:0 10px 22px rgba(0,0,0,.2)}
+.reflection-q.open{border-color:rgba(145,214,255,.5);background:linear-gradient(145deg,rgba(11,61,102,.95),rgba(4,28,53,.95))}
+.reflection-q .q-top{display:flex;align-items:flex-start;gap:12px}
+.reflection-num{width:34px;height:34px;min-width:34px;border-radius:50%;display:grid;place-items:center;background:#0a3a66;color:#91d6ff;font-weight:1000;border:1px solid rgba(145,214,255,.35)}
+.reflection-q:nth-child(1) .reflection-num{color:#91d6ff}
+.reflection-q:nth-child(2) .reflection-num{color:#8ee9c2;border-color:rgba(83,200,255,.35)}
+.reflection-q:nth-child(3) .reflection-num{color:#ffd47a;border-color:rgba(255,212,122,.35)}
+.reflection-q:nth-child(4) .reflection-num{color:#d8b7ff;border-color:rgba(216,183,255,.35)}
+.reflection-q .q-title{display:block;color:#f4fbff;font-weight:900;line-height:1.3;padding-top:3px}
+.reflection-q .q-hint{display:block;color:#89a8bf;font-size:.74rem;margin-top:5px}
+.reflection-answer-text{max-height:0;opacity:0;overflow:hidden;transition:max-height .42s ease,opacity .25s ease;margin-left:46px}
+.reflection-q.open .reflection-answer-text{max-height:500px;opacity:1;margin-top:11px}
+.reflection-answer-text .detail-copy{margin:9px 0 0;color:#c8d9e8;line-height:1.65}
+.reflection-tip{margin-top:11px;padding:9px 11px;border-radius:10px;background:rgba(56,169,255,.08);border:1px solid rgba(56,169,255,.14);color:#a9dfff;font-size:.76rem;font-weight:800}
+.reflection-foot{margin-top:14px;padding:12px 13px;border-top:1px solid rgba(255,255,255,.08);color:#91aac2;font-size:.78rem;text-align:center}
+@media(max-width:780px){.reflection-head{flex-direction:column}.reflection-progress{width:100%}.reflection-grid{grid-template-columns:1fr}.reflection-answer-text{margin-left:0}.reflection-q.open .reflection-answer-text{margin-left:0}}
+
+/* Assignment 2 visual refresh */
+.reflection-shell{position:relative;margin-top:16px;border:1px solid rgba(145,214,255,.35);border-radius:24px;background:radial-gradient(circle at 10% 0%,rgba(56,169,255,.12),transparent 32%),radial-gradient(circle at 100% 100%,rgba(139,92,246,.12),transparent 34%),linear-gradient(145deg,rgba(8,44,77,.98),rgba(3,20,39,.99));padding:24px;box-shadow:0 22px 55px rgba(0,0,0,.28);overflow:hidden}
+.reflection-shell::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(145,214,255,.12) 1px,transparent 1px);background-size:18px 18px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.4),transparent 70%);pointer-events:none}
+.reflection-head{position:relative;display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:14px}
+.reflection-kicker{display:inline-flex;align-items:center;gap:7px;color:#91d6ff;font-size:.72rem;font-weight:1000;letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px}
+.reflection-kicker::before{content:"✦";font-size:.8rem}
+.reflection-head h3{margin:0;color:#f6fbff;font-size:1.55rem;line-height:1.15}
+.reflection-head p{margin:6px 0 0;color:#aac6da;font-size:.9rem;max-width:590px}
+.reflection-badges{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 16px;position:relative}
+.reflection-badge{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(145,214,255,.18);color:#dff3ff;font-size:.72rem;font-weight:900}
+.reflection-progress{min-width:205px;padding:12px 14px;border:1px solid rgba(145,214,255,.24);border-radius:14px;background:rgba(3,21,45,.58);backdrop-filter:blur(8px)}
+.reflection-progress-top{display:flex;justify-content:space-between;gap:12px;color:#dff2ff;font-size:.75rem;font-weight:900;margin-bottom:8px}
+.reflection-progress-track{height:8px;border-radius:999px;background:#07182b;overflow:hidden;border:1px solid rgba(255,255,255,.05)}
+.reflection-progress-fill{height:100%;width:0;background:linear-gradient(90deg,#38a9ff,#8ee9c2,#d8b7ff);border-radius:999px;transition:width .4s cubic-bezier(.2,.8,.2,1)}
+.reflection-actions{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:15px;position:relative}
+.reflection-action{border:1px solid rgba(145,214,255,.28);background:rgba(8,47,85,.8);color:#dff3ff;border-radius:11px;padding:8px 12px;font-size:.76rem;font-weight:900;cursor:pointer;transition:transform .16s ease,background .16s ease,border-color .16s ease;box-shadow:0 5px 16px rgba(0,0,0,.16)}
+.reflection-action:hover{border-color:#38a9ff;background:#0b3f6d;transform:translateY(-1px)}
+.reflection-grid{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.reflection-q{position:relative;border:1px solid rgba(145,214,255,.18);border-radius:18px;background:linear-gradient(145deg,rgba(9,48,84,.84),rgba(3,24,44,.9));padding:18px;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease,background .22s ease;cursor:pointer;overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,.14)}
+.reflection-q::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--reflection-accent,#38a9ff);opacity:.85}
+.reflection-q::after{content:"";position:absolute;width:120px;height:120px;right:-55px;top:-60px;border-radius:50%;background:var(--reflection-accent,#38a9ff);filter:blur(35px);opacity:.06;transition:opacity .22s ease}
+.reflection-q:hover{transform:translateY(-4px);border-color:rgba(145,214,255,.58);box-shadow:0 15px 30px rgba(0,0,0,.23)}
+.reflection-q:hover::after,.reflection-q.open::after{opacity:.14}
+.reflection-q.open{border-color:color-mix(in srgb,var(--reflection-accent,#38a9ff) 55%,white 15%);background:linear-gradient(145deg,rgba(11,61,102,.96),rgba(4,28,53,.97));box-shadow:0 16px 34px rgba(0,0,0,.25)}
+.reflection-q.open .reflection-num{transform:scale(1.08);box-shadow:0 0 0 5px rgba(145,214,255,.06),0 0 20px color-mix(in srgb,var(--reflection-accent,#38a9ff) 45%,transparent);}
+.reflection-q .q-top{display:flex;align-items:flex-start;gap:12px;position:relative;z-index:1}
+.reflection-num{width:38px;height:38px;min-width:38px;border-radius:13px;display:grid;place-items:center;background:rgba(4,24,44,.86);color:var(--reflection-accent,#91d6ff);font-weight:1000;border:1px solid color-mix(in srgb,var(--reflection-accent,#91d6ff) 45%,transparent);font-size:.9rem;transition:transform .2s ease,box-shadow .2s ease}
+.reflection-q .q-icon{font-size:1.25rem;line-height:1;margin-top:1px}
+.reflection-q .q-title{display:block;color:#f4fbff;font-weight:950;line-height:1.3;padding-top:2px}
+.reflection-q .q-hint{display:inline-flex;align-items:center;gap:6px;color:#89a8bf;font-size:.73rem;margin-top:6px;font-weight:800}
+.reflection-q .q-hint::after{content:"↗";transition:transform .18s ease}
+.reflection-q:hover .q-hint::after{transform:translate(2px,-2px)}
+.reflection-answer-text{max-height:0;opacity:0;overflow:hidden;transition:max-height .48s ease,opacity .28s ease,margin-top .28s ease;margin-left:52px;position:relative;z-index:1}
+.reflection-q.open .reflection-answer-text{max-height:520px;opacity:1;margin-top:13px}
+.reflection-answer-text .detail-copy{margin:9px 0 0;color:#c8d9e8;line-height:1.67}
+.reflection-tip{margin-top:12px;padding:10px 12px;border-radius:11px;background:color-mix(in srgb,var(--reflection-accent,#38a9ff) 9%,transparent);border:1px solid color-mix(in srgb,var(--reflection-accent,#38a9ff) 22%,transparent);color:#bfe7ff;font-size:.76rem;font-weight:850}
+.reflection-q:nth-child(1){--reflection-accent:#38a9ff}.reflection-q:nth-child(2){--reflection-accent:#8ee9c2}.reflection-q:nth-child(3){--reflection-accent:#ffd47a}.reflection-q:nth-child(4){--reflection-accent:#d8b7ff}
+.reflection-foot{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;padding:12px 13px;border-top:1px solid rgba(255,255,255,.08);color:#91aac2;font-size:.78rem;text-align:center;position:relative}
+.reflection-foot::before{content:"↘";color:#91d6ff}.reflection-foot::after{content:"↙";color:#91d6ff}
+@media(max-width:780px){.reflection-head{flex-direction:column;align-items:flex-start}.reflection-progress{width:100%}.reflection-grid{grid-template-columns:1fr}.reflection-answer-text{margin-left:0}.reflection-q.open .reflection-answer-text{margin-left:0}}
+
+
+/* Assignment 3 */
+.assignment3-shell{margin-top:18px;border:1px solid rgba(102,186,255,.25);border-radius:24px;overflow:hidden;background:linear-gradient(180deg,rgba(9,24,52,.94),rgba(6,17,38,.96));box-shadow:0 18px 45px rgba(0,0,0,.22)}
+.assignment3-hero{display:flex;justify-content:space-between;gap:22px;align-items:flex-start;padding:26px 28px;border-bottom:1px solid rgba(255,255,255,.08);background:linear-gradient(135deg,rgba(34,113,201,.18),rgba(9,24,52,.18))}
+.assignment3-hero h3{margin:8px 0 8px;font-size:1.55rem;color:#fff}.assignment3-hero p{margin:0;color:#b7cce7;max-width:760px;line-height:1.65}
+.assignment3-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:20px}
+.assignment3-card{padding:20px;border-radius:18px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}.assignment3-card:hover{transform:translateY(-4px);border-color:rgba(102,186,255,.5);box-shadow:0 12px 28px rgba(0,0,0,.18)}
+.assignment3-num{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:rgba(90,177,255,.12);color:#76c7ff;font-weight:800;letter-spacing:.04em}.assignment3-card h4{margin:14px 0 8px;color:#fff;font-size:1.08rem}.assignment3-card p,.assignment3-card li{color:#b7cce7;line-height:1.6}.assignment3-card ul{margin:8px 0 10px;padding-left:20px}.assignment3-note{font-size:.92rem}.assignment3-flow{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-top:14px}.assignment3-flow span{padding:6px 9px;border-radius:999px;background:rgba(102,186,255,.08);border:1px solid rgba(102,186,255,.22);color:#d9efff;font-size:.78rem;font-weight:700}.assignment3-flow b{color:#6fc5ff}.assignment3-checklist{padding:0 20px 22px}.assignment3-checklist>div{padding:18px;border-radius:18px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.08);display:flex;flex-wrap:wrap;gap:9px;align-items:center}.assignment3-checklist strong{width:100%;color:#fff;margin-bottom:2px}.assignment3-checklist span{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);color:#c4d8ee;font-size:.78rem}
+@media(max-width:900px){.assignment3-grid{grid-template-columns:1fr}.assignment3-hero{flex-direction:column}}
+
+
+/* Lab 3 interactive project */
+.project-clickable{cursor:pointer;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}.project-clickable:hover{transform:translateY(-4px);border-color:rgba(145,214,255,.68);box-shadow:0 22px 55px rgba(0,0,0,.34)}.project-clickable:focus{outline:2px solid #91d6ff;outline-offset:3px}
+.lab3-shell{margin-top:18px;border:1px solid rgba(145,214,255,.3);border-radius:24px;overflow:hidden;background:linear-gradient(180deg,rgba(8,26,53,.97),rgba(4,16,34,.98));box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.lab3-hero{padding:28px;background:linear-gradient(135deg,rgba(32,129,211,.2),rgba(8,26,53,.4));border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.lab3-hero h3{margin:8px 0 8px;color:#fff;font-size:1.7rem}.lab3-hero p{margin:0;color:#c1d5e9;line-height:1.65;max-width:800px}.lab3-complete{border:1px solid rgba(94,225,160,.55);background:rgba(94,225,160,.11);color:#a8f3c8;border-radius:999px;padding:7px 12px;font-size:.74rem;font-weight:900;letter-spacing:.08em;white-space:nowrap}
+.lab3-section{padding:22px 24px;border-bottom:1px solid rgba(255,255,255,.07)}.lab3-section:last-child{border-bottom:0}.lab3-section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:15px}.lab3-section h4{margin:0;color:#fff;font-size:1.2rem}.lab3-section p,.lab3-section li{color:#bfd2e6;line-height:1.7}.lab3-section ul{padding-left:20px}
+.lab3-tech-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.lab3-tech-card{padding:18px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.035);transition:transform .2s ease,border-color .2s ease}.lab3-tech-card:hover{transform:translateY(-3px);border-color:rgba(145,214,255,.42)}.lab3-tech-icon{font-size:1.35rem}.lab3-tech-card h5{margin:8px 0 7px;color:#91d6ff;font-size:1rem}.lab3-tech-card p{margin:0;font-size:.94rem}
+.lab3-img-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}.lab3-img-card{padding:12px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.12)}.lab3-img-card img{display:block;width:100%;height:auto;border-radius:12px;background:#071a31}.lab3-img-card span{display:block;margin-top:9px;color:#9fb8d2;font-size:.78rem;text-align:center}.lab3-links{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}.lab3-links a{color:#d7f2ff;text-decoration:none;padding:8px 11px;border-radius:999px;border:1px solid rgba(145,214,255,.26);background:rgba(67,157,230,.09);font-size:.78rem;font-weight:800}.lab3-links a:hover{border-color:#91d6ff;background:rgba(67,157,230,.16)}
+.lab3-ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.lab3-tool{border:1px solid rgba(255,255,255,.08);border-radius:18px;background:rgba(255,255,255,.035);padding:18px}.lab3-tool h5{margin:0 0 8px;color:#fff;font-size:1.05rem}.lab3-tool p{font-size:.88rem;margin:0 0 12px}.lab3-chat-log{height:220px;overflow:auto;padding:12px;border-radius:14px;background:#03101f;border:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;gap:9px}.lab3-chat-msg{max-width:86%;padding:9px 11px;border-radius:12px;font-size:.84rem;line-height:1.5}.lab3-chat-msg.bot{align-self:flex-start;background:#0d3156;color:#dff3ff}.lab3-chat-msg.user{align-self:flex-end;background:#1a577f;color:#fff}.lab3-chat-form{display:flex;gap:8px;margin-top:9px}.lab3-chat-form input{flex:1;min-width:0;border-radius:12px;border:1px solid rgba(145,214,255,.2);background:#07182c;color:#fff;padding:10px 12px;outline:none}.lab3-chat-form button,.lab3-tool button{border:0;border-radius:12px;background:#5fb9f2;color:#05152a;font-weight:900;padding:10px 14px;cursor:pointer}.lab3-chat-form button:hover,.lab3-tool button:hover{filter:brightness(1.08)}
+.lab3-avatar-preview{position:relative;display:grid;place-items:center;min-height:220px;border-radius:14px;background:radial-gradient(circle at 50% 20%,#174870 0,#06192e 60%);border:1px solid rgba(255,255,255,.08);overflow:hidden}.lab3-avatar-preview::after{content:'READY';position:absolute;top:10px;right:10px;font-size:.65rem;font-weight:900;letter-spacing:.12em;padding:5px 8px;border-radius:999px;background:rgba(95,185,242,.12);border:1px solid rgba(145,214,255,.25);color:#9fdcff;transition:.25s ease}.lab3-avatar-preview.listening::after{content:'LISTENING';background:rgba(255,214,92,.12);border-color:rgba(255,214,92,.45);color:#ffd65c}.lab3-avatar-preview.talking::after{content:'TALKING';background:rgba(94,225,160,.12);border-color:rgba(94,225,160,.45);color:#8df1b5}.lab3-avatar-preview img{max-width:100%;max-height:260px;width:auto;height:260px;display:block;object-fit:contain;border-radius:18px;filter:saturate(1.06) contrast(1.03);transition:transform .25s ease,filter .25s ease,box-shadow .25s ease}.lab3-avatar-preview.generated img{filter:saturate(1.15) contrast(1.08) drop-shadow(0 0 14px rgba(145,214,255,.28));transform:scale(1.02)}.lab3-avatar-preview.talking img{animation:avatarTalk .48s ease-in-out infinite alternate}.lab3-avatar-preview.listening img{animation:avatarListen 1s ease-in-out infinite alternate}.lab3-avatar-preview.talking::before,.lab3-avatar-preview.listening::before{content:'';position:absolute;inset:18%;border-radius:50%;border:2px solid rgba(145,214,255,.22);animation:avatarRing 1.1s ease-out infinite;pointer-events:none}.lab3-upload-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.lab3-upload-row input{flex:1;min-width:0;color:#bcd1e7}.lab3-person-chat{margin-top:12px}.lab3-person-controls{display:flex;gap:8px;align-items:center}.lab3-person-chat input{width:100%;box-sizing:border-box;border-radius:12px;border:1px solid rgba(145,214,255,.2);background:#07182c;color:#fff;padding:10px 12px;outline:none}.lab3-mic-btn{flex:0 0 auto;border:1px solid rgba(145,214,255,.28);border-radius:12px;background:#0d3156;color:#dff3ff;padding:10px 13px;cursor:pointer;font-weight:900;min-width:46px}.lab3-mic-btn:hover{background:#154469}.lab3-mic-btn.listening{background:#5fb9f2;color:#05152a;animation:micPulse .9s ease-in-out infinite alternate}.lab3-voice-status{margin-top:7px;min-height:18px;font-size:.74rem;color:#86a1bc}.lab3-person-reply{margin-top:9px;min-height:42px;padding:10px 12px;border-radius:12px;background:#0d3156;color:#dff3ff;font-size:.84rem}.lab3-note{margin-top:12px;font-size:.76rem;color:#86a1bc !important}.lab3-complete-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.lab3-check{padding:11px 12px;border-radius:13px;border:1px solid rgba(94,225,160,.2);background:rgba(94,225,160,.06);color:#c8f5d8;font-size:.8rem;font-weight:800}.lab3-check::before{content:'✓';margin-right:7px;color:#5ee1a0}@media(max-width:900px){.lab3-hero{flex-direction:column}.lab3-tech-grid,.lab3-img-grid,.lab3-ai-grid{grid-template-columns:1fr}.lab3-complete-list{grid-template-columns:1fr 1fr}}@media(max-width:600px){.lab3-complete-list{grid-template-columns:1fr}}
+
+@keyframes avatarTalk{from{transform:translateY(0) scale(1.02)}to{transform:translateY(-3px) scale(1.035)}}
+@keyframes avatarListen{from{transform:scale(1.02)}to{transform:scale(1.04)}}
+@keyframes avatarRing{0%{transform:scale(.8);opacity:.7}100%{transform:scale(1.25);opacity:0}}
+@keyframes micPulse{from{box-shadow:0 0 0 rgba(95,185,242,0)}to{box-shadow:0 0 18px rgba(95,185,242,.35)}}
+</style>
+</head>
+<body>
+<button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+<div class="overlay" id="overlay"></div>
+<aside class="sidebar" id="sidebar">
+<button class="close" id="closeBtn" aria-label="Close navigation">×</button>
+<div class="side-title">CS 125 • Site Map</div>
+<nav class="nav">
+<button onclick="showPage('home')">⌂ &nbsp; Home</button><button onclick="showPage('about')">● &nbsp; About Me</button><button onclick="showPage('education')">◆ &nbsp; Education</button><button onclick="showPage('skills')">⚙ &nbsp; Skills</button><button onclick="showPage('projects')">&lt;/&gt; &nbsp; Projects</button><button onclick="showPage('security')">◇ &nbsp; Security</button><button onclick="showPage('ai')">✦ &nbsp; AI</button><button onclick="showPage('contact')">✉ &nbsp; Contact</button><button onclick="showPage('assignments')">▣ &nbsp; Assignments</button><button onclick="goToSiteMap()">⌘ &nbsp; Site Map</button>
+</nav>
+
+</aside>
+<div class="page">
+<header class="topbar"><div class="brand">SADI'S <span>DIGITAL CITIZENSHIP PORTFOLIO</span></div><div class="topright">CS 125 • Semester Project</div></header>
+<main>
+<section id="home" class="section active">
+<div class="hero"><div class="hero-content"><div class="eyebrow">CS 125 • Being a Digital Citizen</div><h1>My <span>Digital</span><br>Citizen Portfolio</h1><p>This website documents my semester-long journey through CS 125, from digital citizenship and the internet to hardware, security, databases, programming, web development, technology careers, and artificial intelligence.</p><div class="cta"><button class="map-cta" onclick="goToSiteMap()"><span class="map-cta-text"><span class="map-cta-title">Explore the Site Map</span><span class="map-cta-sub">Jump to every section</span></span><span class="map-cta-arrow">→</span></button><button class="btn" onclick="showPage('assignments')">View Assignments →</button></div></div></div>
+<div id="homeSiteMap" class="map-wrap" style="margin-top:18px"><h2 class="section-title" style="font-size:2rem;margin-bottom:8px">Site Map</h2><p class="subtitle" style="margin-bottom:18px">Follow the path from section to section, or use the slide-out menu.</p><div class="zigzag-map" id="zigzagMap">
+<svg class="zigzag-svg" viewBox="0 0 100 98" role="img" aria-label="Site map connecting Home, About Me, Education, Skills, Projects, Assignments, Security, AI, and Contact">
+  <line class="map-connector" x1="50" y1="10" x2="15" y2="21"></line>
+  <line class="map-connector" x1="15" y1="21" x2="85" y2="32"></line>
+  <line class="map-connector" x1="85" y1="32" x2="15" y2="43"></line>
+  <line class="map-connector" x1="15" y1="43" x2="85" y2="54"></line>
+  <line class="map-connector" x1="85" y1="54" x2="15" y2="65"></line>
+  <line class="map-connector" x1="15" y1="65" x2="85" y2="76"></line>
+  <line class="map-connector" x1="85" y1="76" x2="15" y2="87"></line>
+  <line class="map-connector" x1="15" y1="87" x2="85" y2="98"></line>
+
+  <g onclick="showPage('home')" style="cursor:pointer"><circle class="map-node" cx="50" cy="10" r="10.5"></circle><text class="map-label" x="50" y="10">Home</text></g>
+  <g onclick="showPage('about')" style="cursor:pointer"><circle class="map-node" cx="15" cy="21" r="10.5"></circle><text class="map-label" x="15" y="21">About Me</text></g>
+  <g onclick="showPage('education')" style="cursor:pointer"><circle class="map-node" cx="85" cy="32" r="10.5"></circle><text class="map-label" x="85" y="32">Education</text></g>
+  <g onclick="showPage('skills')" style="cursor:pointer"><circle class="map-node" cx="15" cy="43" r="10.5"></circle><text class="map-label" x="15" y="43">Skills</text></g>
+  <g onclick="showPage('projects')" style="cursor:pointer"><circle class="map-node" cx="85" cy="54" r="10.5"></circle><text class="map-label" x="85" y="54">Projects</text></g>
+  <g onclick="showPage('assignments')" style="cursor:pointer"><circle class="map-node" cx="15" cy="65" r="10.5"></circle><text class="map-label" x="15" y="65">Assignments</text></g>
+  <g onclick="showPage('security')" style="cursor:pointer"><circle class="map-node" cx="85" cy="76" r="10.5"></circle><text class="map-label" x="85" y="76">Security</text></g>
+  <g onclick="showPage('ai')" style="cursor:pointer"><circle class="map-node" cx="15" cy="87" r="10.5"></circle><text class="map-label" x="15" y="87">AI</text></g>
+  <g onclick="showPage('contact')" style="cursor:pointer"><circle class="map-node" cx="85" cy="98" r="10.5"></circle><text class="map-label" x="85" y="98">Contact</text></g>
+</svg></div></div>
+</section>
+<section id="about" class="section">
+  <div class="about-hero card">
+    <div class="about-kicker">GET TO KNOW ME</div>
+    <h2 class="section-title">About Me</h2>
+    <p class="about-intro">I am a student-athlete at Caldwell University and a <strong>catcher on the Caldwell baseball team</strong>. I am also pursuing a double major in <strong>Business Analytics</strong> and <strong>Mathematics</strong>. This portfolio gives me a place to share a little about who I am, where I come from, and the academic path I am building for myself.</p>
+  </div>
+
+  <div class="about-grid">
+    <div class="card about-card about-wide">
+      <div class="about-icon">🎓</div>
+      <div>
+        <h3>Student-Athlete at Caldwell</h3>
+        <p>I am in my second year at Caldwell University and am a catcher on the baseball team. Balancing academics, baseball, and my responsibilities on campus has helped shape how I approach my goals and stay committed to the things that matter to me.</p>
+      </div>
+    </div>
+
+    <div class="card about-card">
+      <div class="about-icon">📊</div>
+      <h3>Business Analytics</h3>
+      <p>I am studying Business Analytics because I want to learn how to run and manage an organization. My long-term goal is to own and run my own baseball organization one day, similar to what my brother has built with his travel teams.</p>
+    </div>
+
+    <div class="card about-card">
+      <div class="about-icon">∑</div>
+      <h3>Mathematics</h3>
+      <p>Mathematics has always been one of my strongest subjects and is something I genuinely enjoy. I wanted to continue developing my skills in a subject that I have always felt comfortable and interested in.</p>
+    </div>
+
+    <div class="card about-card">
+      <div class="about-icon">🏠</div>
+      <h3>Family</h3>
+      <p>I have two older brothers and one younger sister. My family is an important part of my life and background.</p>
+    </div>
+
+    <div class="card about-card">
+      <div class="about-icon">🌎</div>
+      <h3>My Background</h3>
+      <p>I was born in the Dominican Republic and moved to the United States at a young age. I have lived in New York since I was four years old.</p>
+    </div>
+
+    <div class="card about-card">
+      <div class="about-icon">⚾</div>
+      <h3>Baseball &amp; My Family</h3>
+      <p>Baseball has always been an important part of my family. Both of my older brothers have coached, and one of them played professional baseball and now runs a travel baseball organization with eight teams in Arizona.</p>
+    </div>
+
+    <div class="card about-card">
+      <div class="about-icon">🤝</div>
+      <h3>Admissions Ambassador</h3>
+      <p>I have been a Caldwell Admissions Ambassador since my freshman year. Now in my second year at Caldwell, I continue to represent the university and help prospective students learn more about the school.</p>
+    </div>
+
+    <div class="card about-card">
+      <div class="about-icon">🧭</div>
+      <h3>Student-Athlete Mentor</h3>
+      <p>I am also a Student-Athlete Mentor at Caldwell, where I can support and encourage fellow student-athletes while being involved in the campus community.</p>
+    </div>
+  </div>
+
+  <div class="card about-next">
+    <div>
+      <span class="tag">MY GOAL</span>
+      <h3>Making Baseball More Accessible</h3>
+      <p>One of my long-term goals is to coach baseball and help make the game more affordable and accessible for families who may not have the financial resources to easily participate. I want to use the experience I gain through baseball and my own family background to help give more people an opportunity to be part of the sport.</p>
+    </div>
+  </div>
+</section>
+<section id="education" class="section">
+  <div class="edu-campus-banner">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/d/dc/Caldwell_University_aerial_campus.jpg" alt="Aerial landscape view of Caldwell University campus" loading="eager">
+    <div class="edu-campus-caption">Caldwell University</div>
+  </div>
+
+  <div class="about-hero card">
+    <div class="about-kicker">MY EDUCATION</div>
+    <h2 class="section-title">Education</h2>
+  </div>
+
+  <div class="education-list">
+    <div class="card edu-landscape">
+      <div class="edu-visual edu-titans-mark" role="img" aria-label="East Ramapo Titans baseball">
+        <div class="titans-wordmark">TITANS</div>
+        <div class="titans-sub">EAST RAMAPO • BASEBALL</div>
+      </div>
+      <div class="edu-copy">
+        <span class="tag">HIGH SCHOOL</span>
+        <h3>Ramapo High School</h3>
+        <p>Graduated from Ramapo High School in New York in <strong>2025 with honors.</strong></p>
+      </div>
+    </div>
+
+    <div class="card edu-landscape">
+      <div class="edu-visual edu-logo-wrap" role="img" aria-label="Caldwell University wordmark">
+        <div class="caldwell-wordmark">
+          <div class="cw-caldwell">Caldwell</div>
+          <div class="cw-rule"></div>
+          <div class="cw-university">University</div>
+        </div>
+      </div>
+      <div class="edu-copy">
+        <span class="tag">CURRENT SCHOOL</span>
+        <h3>Caldwell University</h3>
+        <p>Currently a <strong>sophomore</strong> at Caldwell University.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="edu-stats">
+    <div class="edu-stat"><span class="edu-stat-label">MAJORS</span><strong>Business Analytics</strong><strong>Mathematics</strong></div>
+    <div class="edu-stat"><span class="edu-stat-label">CURRENT GPA</span><strong>3.58</strong></div>
+  </div>
+</section>
+<section id="skills" class="section">
+  <h2 class="section-title">Skills</h2>
+  <p class="subtitle">Skills I have developed through school, baseball, leadership, and professional experience.</p>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-top"><div class="skill-icon">∑</div><h3>Academic</h3></div>
+      <p>Skills built through my double major and coursework.</p>
+      <div class="skill-tags"><span>Mathematics</span><span>Business Analytics</span><span>Problem Solving</span><span>Data Analysis</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-top"><div class="skill-icon">⌘</div><h3>Technology</h3></div>
+      <p>Technology skills I have developed through school and CS 125.</p>
+      <div class="skill-tags"><span>Microsoft Office</span><span>Excel</span><span>Website Development</span><span>Digital Citizenship</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-top"><div class="skill-icon">⚾</div><h3>Baseball &amp; Leadership</h3></div>
+      <p>Skills developed through being a catcher, mentor, and teammate.</p>
+      <div class="skill-tags"><span>Catching</span><span>Communication</span><span>Teamwork</span><span>Leadership</span><span>Mentoring</span></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-top"><div class="skill-icon">★</div><h3>Professional</h3></div>
+      <p>Skills I use as a Caldwell Admissions Ambassador and student leader.</p>
+      <div class="skill-tags"><span>Admissions Outreach</span><span>Public Speaking</span><span>Organization</span><span>Time Management</span><span>Working with Students</span></div>
+    </div>
+  </div>
+  <div class="skills-note"><strong>Growing throughout the semester:</strong> This section can be expanded as I learn new technology, security, networking, programming, database, and AI skills through CS 125.</div>
+</section>
+<section id="projects" class="section">
+  <div class="project-feature project-clickable" role="button" tabindex="0" onclick="openAssignment(2)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openAssignment(2)}">
+    <div class="project-feature-top">
+      <div>
+        <div class="project-kicker">★ Featured Project</div>
+        <h2 class="section-title" style="margin-top:7px">Current Project</h2>
+      </div>
+      <div class="project-status">LAB 3 • CURRENT</div>
+    </div>
+    <div class="project-feature-body">
+      <div class="project-copy">
+        <h3>Lab 3 – Internet Technologies &amp; Interactive AI Website</h3>
+        <p>This is the project we are currently working on. It combines Internet concepts with interactive website features, including a chatbot and a digital-person demonstration.</p>
+        <div class="project-meta"><span>CS 125</span><span>Lab 3</span><span>Internet Technologies</span><span>Interactive AI</span></div>
+        <div class="project-note">Click anywhere on this project to open the completed Lab 3 page.</div>
+      </div>
+      <div class="project-side">
+        <h4>Open Lab 3</h4>
+        <ul><li>Internet technologies explained in my own words</li><li>Interactive chatbot demo</li><li>Upload-photo digital person demonstration</li><li>Hyperlinks, visuals, and organized sections</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="security" class="section">
+  <div class="security-hero card">
+    <div class="about-kicker">DIGITAL SECURITY • INTERACTIVE</div>
+    <div class="security-hero-row">
+      <div>
+        <h2 class="section-title">Security</h2>
+        <p class="about-intro">This section breaks digital security into simple topics you can explore, then test yourself with a drag-and-drop quiz.</p>
+      </div>
+      <button class="quiz-launch" id="startSecurityQuiz" type="button">⚡ Quiz Me</button>
+    </div>
+  </div>
+
+  <div class="security-tabs" role="tablist" aria-label="Security topics">
+    <button class="security-tab active" data-security-tab="watch" role="tab" aria-selected="true">🚨 Watch Out For</button>
+    <button class="security-tab" data-security-tab="protect" role="tab" aria-selected="false">🛡 Protect Yourself</button>
+    <button class="security-tab" data-security-tab="ethics" role="tab" aria-selected="false">⚖ Online Ethics</button>
+      </div>
+
+  <div class="security-panels">
+    <div class="security-panel active" data-security-panel="watch" role="tabpanel">
+      <div class="security-panel-head"><span class="security-panel-icon">🚨</span><div><h3>Watch Out For</h3><p>Common tricks and threats that can put your information or devices at risk.</p></div></div>
+      <div class="security-topic-grid">
+        <div class="security-topic"><span>🎣</span><h4>Phishing</h4><p>Fake emails, texts, or websites that try to make you reveal passwords or personal information.</p></div>
+        <div class="security-topic"><span>🕵️</span><h4>Social Engineering</h4><p>Someone manipulates you into giving access or information instead of attacking the technology directly.</p></div>
+        <div class="security-topic"><span>🦠</span><h4>Malware</h4><p>Malicious software can damage devices, steal information, or give someone unwanted access.</p></div>
+        <div class="security-topic"><span>⚠️</span><h4>Suspicious Links</h4><p>Unexpected links and attachments can lead to fake login pages, malware, or scams.</p></div>
+        <div class="security-topic"><span>🚨</span><h4>Unexpected Activity</h4><p>Unknown logins, verification requests, or account changes can be signs that someone is trying to access an account.</p></div>
+      </div>
+    </div>
+
+    <div class="security-panel" data-security-panel="protect" role="tabpanel" hidden>
+      <div class="security-panel-head"><span class="security-panel-icon">🛡</span><div><h3>Protect Yourself</h3><p>Simple habits that make your accounts, devices, and information harder to compromise.</p></div></div>
+      <div class="security-topic-grid">
+        <div class="security-topic"><span>🔑</span><h4>Strong Passwords</h4><p>Use long, unique passwords and avoid reusing the same password everywhere.</p></div>
+        <div class="security-topic"><span>📱</span><h4>Multi-Factor Authentication</h4><p>Add another verification step so a stolen password alone is not enough to sign in.</p></div>
+        <div class="security-topic"><span>⬆️</span><h4>Keep Things Updated</h4><p>Software updates often include security fixes that protect against known weaknesses.</p></div>
+        <div class="security-topic"><span>👀</span><h4>Think Before You Click</h4><p>Check who sent something, inspect links, and slow down when a message creates urgency.</p></div>
+        <div class="security-topic"><span>🔔</span><h4>Watch Login Alerts</h4><p>Pay attention to security notifications and verification requests so you can act quickly when something looks unfamiliar.</p></div>
+      </div>
+    </div>
+
+    <div class="security-panel" data-security-panel="ethics" role="tabpanel" hidden>
+      <div class="security-panel-head"><span class="security-panel-icon">⚖</span><div><h3>Online Ethics</h3><p>Using technology responsibly means thinking about how your actions affect other people.</p></div></div>
+      <div class="security-topic-grid">
+        <div class="security-topic"><span>🧾</span><h4>Copyright</h4><p>Respect the creators of photos, videos, writing, software, and other digital work.</p></div>
+        <div class="security-topic"><span>✍️</span><h4>Plagiarism</h4><p>Give credit for other people's work and make it clear when ideas or words are not your own.</p></div>
+        <div class="security-topic"><span>🤝</span><h4>Respect</h4><p>Communicate responsibly online and remember that there are real people behind accounts and screens.</p></div>
+        <div class="security-topic"><span>🤖</span><h4>Responsible AI</h4><p>Use AI honestly, check its output, and avoid using it to mislead or harm others.</p></div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+
+  <div class="security-quiz" id="securityQuiz" hidden>
+    <div class="quiz-head">
+      <div><span class="project-kicker">INTERACTIVE QUIZ</span><h3>Match the security ideas</h3><p>Drag each answer chip into the category where it belongs. Correct drops flash green; incorrect drops flash red and return the chip.</p></div>
+      <button class="btn" id="resetSecurityQuiz" type="button">Reset Quiz</button>
+    </div>
+    <div class="quiz-board" id="securityQuizBoard">
+      <div class="quiz-targets">
+        <div class="quiz-target" data-answer-group="threats"><div class="quiz-target-title">🚨 Threats</div><p>Things to watch out for</p><div class="target-dropzone"></div></div>
+        <div class="quiz-target" data-answer-group="protect"><div class="quiz-target-title">🛡 Protect</div><p>Habits that make you safer</p><div class="target-dropzone"></div></div>
+        <div class="quiz-target" data-answer-group="ethics"><div class="quiz-target-title">⚖ Ethics</div><p>Responsible online behavior</p><div class="target-dropzone"></div></div>
+      </div>
+      <div class="quiz-tray-wrap"><div class="quiz-tray-label">ANSWER BANK</div><div class="quiz-tray" id="securityQuizTray"></div></div>
+      <div class="quiz-result" id="securityQuizResult" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+<section id="ai" class="section ai-page"><h2 class="section-title">Artificial Intelligence</h2><p class="subtitle">AI concepts, applications, benefits, limitations, and responsible use.</p><div class="wip-panel"><div class="wip-inner"><span class="wip-label">WORK IN PROGRESS • LAB 14 SOON TO COME</span><h3>AI is under construction.</h3><p>This section will be completed when we reach Lab 14.</p></div></div></section>
+<section id="contact" class="section ai-page"><h2 class="section-title">Contact</h2><p class="subtitle">Professional contact information will be added later.</p><div class="wip-panel"><div class="wip-inner"><span class="wip-label">WORK IN PROGRESS • COMING SOON</span><h3>Contact is under construction.</h3><p>This section will be completed when the portfolio is ready for professional contact information.</p></div></div></section>
+<section id="assignments" class="section"><div class="assignment-head"><div><h2 class="section-title" style="margin-bottom:6px">Assignments</h2><p class="subtitle" style="margin-bottom:0">Click any assignment to open its page and view the instructions or work.</p></div><div class="assignment-count">16 labs • Monday cadence</div></div><div class="assignment-grid" id="assignmentGrid"></div></section>
+<section id="assignment-detail" class="section"><button class="btn" onclick="showPage('assignments')">← Back to Assignments</button><div id="assignmentDetailContent" style="margin-top:22px"></div></section>
+
+</main>
+<div class="footer">CS 125 • Sadi's Website • Semester Project</div>
+
+<!-- AI Assistant -->
+<button class="ai-chat-bubble" id="aiChatBubble" aria-label="Open Sadi's website assistant">✦</button>
+<section class="ai-chat-window" id="aiChatWindow" aria-label="Website assistant">
+  <div class="ai-chat-head">
+    <div class="ai-chat-title">
+      <div class="ai-avatar">✦</div>
+      <div><div class="ai-chat-name">Sadi's Assistant</div><div class="ai-chat-status">Website helper • Basic AI-style features</div></div>
+    </div>
+    <button class="ai-chat-close" id="aiChatClose" aria-label="Close assistant">×</button>
+  </div>
+  <div class="ai-chat-messages" id="aiChatMessages">
+    <div class="ai-msg bot">Hi! I’m Sadi’s Website Assistant. I can take you to a tab, explain a tab in more detail, explain why a page was made and what it is for, explain how the site was built, give you extra information about the sections, and help you find assignments or the Site Map. Try asking “take me to Security,” “explain the Assignments tab,” or “how was this website made?”</div>
+  </div>
+  <div class="ai-chat-quick">
+    <button class="ai-chip" data-msg="Take me to the Assignments tab.">Assignments</button>
+    <button class="ai-chip" data-msg="Show me the Site Map.">Site Map</button>
+    <button class="ai-chip" data-msg="Explain this website in more detail.">About Site</button>
+    <button class="ai-chip" data-msg="How was this website made?">How It Was Made</button>
+  </div>
+  <form class="ai-chat-input" id="aiChatForm">
+    <input id="aiChatInput" type="text" autocomplete="off" placeholder="Ask me anything..." />
+    <button class="ai-chat-send" type="submit">Send</button>
+  </form>
+</section>
+
+</div>
+<script>
+const assignments=[
+['9/14','CH 1 – Being a Digital Citizen','Lab 1','complete'],['9/21','CH 2 – The Internet','Lab 2','complete'],['9/28','CH 3 – Internet Technologies & Interactive AI Website','Lab 3','complete'],['10/5','CH 4 – Programs and Apps','Lab 4','wip'],['10/12','CH 5 – Digital Security and Ethics','Lab 5','wip'],['10/19','CH 6 – Input and Output','Lab 6','wip'],['10/26','CH 7 – Digital Storage','Lab 7','wip'],['11/2','Mid Term – Present','Lab 8','wip'],['11/9','CH 8 – Operating Systems','Lab 9','wip'],['11/16','CH 9 – Networking','Lab 10','wip'],['11/23','CH 10 – Database','Lab 11','wip'],['11/30','CH 11 – Program Development','Lab 12','wip'],['12/7','CH 12 – Web Development','Lab 13','wip'],['12/14','CH 13 – Technology Careers','Lab 14','wip'],['12/21','CH 14 – AI','Lab 15','wip'],['12/21','Final Exam','Lab 16','wip']];
+const grid=document.getElementById('assignmentGrid');
+if(grid){ assignments.forEach((a,index)=>{const status=a[3];const card=document.createElement('button');card.type='button';card.className='assignment '+status;card.setAttribute('aria-label',`Open ${a[1]} ${a[2]}`);card.onclick=()=>openAssignment(index);card.innerHTML=`<span class="date">${a[0]}</span><h3>${a[1]}</h3><div class="lab">${a[2]}</div><div class="status ${status}">${status==='complete'?'Completed':'Work in Progress'}</div>`;grid.appendChild(card)}) }
+const assignmentDetails={
+  0:`<div class="highlight"><strong>Assignment 1: Project Proposal and Website Planning</strong><p class="detail-copy">Plan and organize the Digital Citizen Portfolio website.</p><ul class="detail-list"><li>Website title</li><li>Website purpose</li><li>Target audience</li><li>Planned website pages</li><li>Site map</li></ul></div>`,
+  1:`<div class="reflection-shell">
+    <div class="reflection-head">
+      <div>
+        <div class="reflection-kicker">Reflection Lab</div>
+        <h3>Assignment 2: Digital Citizen Reflection Page</h3>
+        <p>Chapter 1 – Being a Digital Citizen · 100 Points</p>
+      </div>
+      <div class="reflection-progress">
+        <div class="reflection-progress-top"><span>Reflection progress</span><span id="reflectionProgressText">0/4 read</span></div>
+        <div class="reflection-progress-track"><div class="reflection-progress-fill" id="reflectionProgressFill"></div></div>
+      </div>
+    </div>
+    <div class="reflection-badges"><span class="reflection-badge">4 questions</span><span class="reflection-badge">Click to reveal</span><span class="reflection-badge">Digital Citizenship</span></div>
+    <div class="reflection-actions"><button type="button" class="reflection-action" id="reflectionOpenAll">Open All</button><button type="button" class="reflection-action" id="reflectionCloseAll">Close All</button></div>
+    <div class="reflection-grid">
+      <div class="reflection-q" data-reflection="1"><div class="q-top"><span class="reflection-num">1</span><span class="q-icon">🌐</span><div><span class="q-title">What is a digital citizen?</span><span class="q-hint">Click to reveal my reflection</span></div></div><div class="reflection-answer-text"><p class="detail-copy">A digital citizen is a person who uses technology, the internet, and digital platforms in a safe, responsible, and respectful way. Being a digital citizen means understanding that the choices we make online can affect other people as well as ourselves.</p><p class="detail-copy">A good digital citizen thinks carefully before posting, communicates respectfully, protects personal information, and understands that online spaces are still places where our actions have consequences. Digital citizenship is not only about knowing how to use technology, but also about using it in a responsible way.</p><div class="reflection-tip">Key idea: Being online comes with the same responsibility as being part of any community.</div></div></div>
+      <div class="reflection-q" data-reflection="2"><div class="q-top"><span class="reflection-num">2</span><span class="q-icon">💬</span><div><span class="q-title">How should students behave online?</span><span class="q-hint">Click to reveal my reflection</span></div></div><div class="reflection-answer-text"><p class="detail-copy">Students should behave online with the same respect and responsibility they would show in person. They should communicate respectfully, avoid bullying or harmful comments, and think about how their words might affect someone else before sending or posting them.</p><p class="detail-copy">Students should also protect their personal information, follow school and platform rules, give credit when using someone else's work, and avoid sharing inappropriate or misleading content. Taking a moment to think before posting can prevent problems later and help create a more positive online environment.</p><div class="reflection-tip">Key idea: Pause, think, and treat the person on the other side of the screen with respect.</div></div></div>
+      <div class="reflection-q" data-reflection="3"><div class="q-top"><span class="reflection-num">3</span><span class="q-icon">👣</span><div><span class="q-title">What is a digital footprint?</span><span class="q-hint">Click to reveal my reflection</span></div></div><div class="reflection-answer-text"><p class="detail-copy">A digital footprint is the record of information a person leaves behind through their online activity. This can include social media posts, comments, photos, videos, searches, messages, accounts, and other information shared on the internet.</p><p class="detail-copy">Digital footprints can last for a long time, even when someone thinks they have deleted something. Because of this, it is important to think about what you post and share. A positive digital footprint can show responsibility and good judgment, while careless online activity can affect a person's reputation, school opportunities, or future career.</p><div class="reflection-tip">Key idea: What you post today can become part of how people see you tomorrow.</div></div></div>
+      <div class="reflection-q" data-reflection="4"><div class="q-top"><span class="reflection-num">4</span><span class="q-icon">🧭</span><div><span class="q-title">Why is digital citizenship important?</span><span class="q-hint">Click to reveal my reflection</span></div></div><div class="reflection-answer-text"><p class="detail-copy">Digital citizenship is important because technology is now a major part of school, work, communication, entertainment, and everyday life. People interact online constantly, which means knowing how to use technology responsibly can help protect both individuals and the people around them.</p><p class="detail-copy">Good digital citizenship helps people stay safer online, protect their privacy, make responsible choices, and treat others with respect. It also helps students become more aware of how their online behavior can affect their future. Learning these habits now can make it easier to use technology confidently and responsibly later in life.</p><div class="reflection-tip">Key idea: Good digital habits now can help you online in school, work, and everyday life.</div></div></div>
+    </div>
+    <div class="reflection-foot">Click each card to reveal the answer and build your reflection progress.</div>
+  </div>`,
+  2:`<div class="lab3-shell"><div class="lab3-hero"><div><div class="reflection-kicker">Current Project • Completed Lab</div><h3>Assignment 3: Internet Technologies and Interactive AI Website</h3><p>This page demonstrates how the Internet works and how interactive features can be built into a website. It combines written explanations, visual examples, hyperlinks, a chatbot demo, and an interactive digital-person demonstration.</p></div><div class="lab3-complete">LAB 3 • COMPLETED</div></div>
+    <div class="lab3-section"><div class="lab3-section-head"><div><div class="reflection-kicker">PART 1</div><h4>Internet Technologies</h4></div><span class="tag">My own words</span></div><div class="lab3-tech-grid"><article class="lab3-tech-card"><div class="lab3-tech-icon">🌐</div><h5>How the Internet Works</h5><p>The Internet is a huge network made up of many smaller networks that communicate with each other. When I open a website, my device sends data through my network connection and routers help move that data toward the server that hosts the website. The information is broken into packets, sent across the network, and then put back together when it reaches the destination.</p></article><article class="lab3-tech-card"><div class="lab3-tech-icon">📡</div><h5>Internet Service Providers (ISPs)</h5><p>An ISP is the company or organization that connects a person or business to the Internet. An ISP can provide the physical connection, such as cable, fiber, or wireless service, and it gives the customer a path to reach other networks and online services. Without an ISP or another network connection, a normal device would not be able to reach the wider Internet.</p></article><article class="lab3-tech-card"><div class="lab3-tech-icon">🧭</div><h5>Web Browsers</h5><p>A web browser is the application I use to access and display websites. Browsers such as Safari, Chrome, Firefox, and Edge take website code and turn it into the pages, images, buttons, and other content I see on screen. The browser also lets me move between pages, enter web addresses, save bookmarks, and use web applications.</p></article><article class="lab3-tech-card"><div class="lab3-tech-icon">🔎</div><h5>Search Engines</h5><p>A search engine helps people find information on the web. Search engines discover and organize pages, build an index of that information, and then rank relevant results when someone searches. A search engine is different from a browser: the browser is the program used to access websites, while the search engine is a service that helps find pages.</p></article></div><div class="lab3-img-grid"><div class="lab3-img-card"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20900%20330%22%3E%3Crect%20width%3D%22900%22%20height%3D%22330%22%20rx%3D%2224%22%20fill%3D%22%23071a34%22%2F%3E%3Cg%20font-family%3D%22Arial%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3E%3Crect%20x%3D%2265%22%20y%3D%22120%22%20width%3D%22150%22%20height%3D%2290%22%20rx%3D%2218%22%20fill%3D%22%23123e69%22%20stroke%3D%22%2391d6ff%22%20stroke-width%3D%222%22%2F%3E%3Ctext%20x%3D%22140%22%20y%3D%22157%22%20font-size%3D%2222%22%3EYour%20Device%3C%2Ftext%3E%3Ctext%20x%3D%22140%22%20y%3D%22184%22%20font-size%3D%2216%22%20fill%3D%22%239fc6e8%22%3Ephone%20%2F%20laptop%3C%2Ftext%3E%3Crect%20x%3D%22375%22%20y%3D%22120%22%20width%3D%22150%22%20height%3D%2290%22%20rx%3D%2218%22%20fill%3D%22%23123e69%22%20stroke%3D%22%2391d6ff%22%20stroke-width%3D%222%22%2F%3E%3Ctext%20x%3D%22450%22%20y%3D%22157%22%20font-size%3D%2222%22%3EInternet%3C%2Ftext%3E%3Ctext%20x%3D%22450%22%20y%3D%22184%22%20font-size%3D%2216%22%20fill%3D%22%239fc6e8%22%3Econnected%20networks%3C%2Ftext%3E%3Crect%20x%3D%22685%22%20y%3D%22120%22%20width%3D%22150%22%20height%3D%2290%22%20rx%3D%2218%22%20fill%3D%22%23123e69%22%20stroke%3D%22%2391d6ff%22%20stroke-width%3D%222%22%2F%3E%3Ctext%20x%3D%22760%22%20y%3D%22157%22%20font-size%3D%2222%22%3EServer%3C%2Ftext%3E%3Ctext%20x%3D%22760%22%20y%3D%22184%22%20font-size%3D%2216%22%20fill%3D%22%239fc6e8%22%3Ewebsite%20%2F%20service%3C%2Ftext%3E%3Ctext%20x%3D%22300%22%20y%3D%22148%22%20font-size%3D%2240%22%20fill%3D%22%2391d6ff%22%3E%E2%86%92%3C%2Ftext%3E%3Ctext%20x%3D%22610%22%20y%3D%22148%22%20font-size%3D%2240%22%20fill%3D%22%2391d6ff%22%3E%E2%86%92%3C%2Ftext%3E%3Ctext%20x%3D%22450%22%20y%3D%2272%22%20font-size%3D%2223%22%20fill%3D%22%2391d6ff%22%3EPackets%20travel%20between%20networks%3C%2Ftext%3E%3Ctext%20x%3D%22450%22%20y%3D%22282%22%20font-size%3D%2218%22%20fill%3D%22%23b8d7ef%22%3ERouters%20help%20move%20data%20toward%20its%20destination.%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Diagram showing a device sending packets through the Internet to a server"><span>Internet data moving from a device through connected networks to a server.</span></div><div class="lab3-img-card"><img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20900%20330%22%3E%3Crect%20width%3D%22900%22%20height%3D%22330%22%20rx%3D%2224%22%20fill%3D%22%23071a34%22%2F%3E%3Cg%20font-family%3D%22Arial%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3E%3Ccircle%20cx%3D%22160%22%20cy%3D%22165%22%20r%3D%2272%22%20fill%3D%22%23123e69%22%20stroke%3D%22%2391d6ff%22%20stroke-width%3D%222%22%2F%3E%3Ctext%20x%3D%22160%22%20y%3D%22158%22%20font-size%3D%2222%22%3EBrowser%3C%2Ftext%3E%3Ctext%20x%3D%22160%22%20y%3D%22187%22%20font-size%3D%2215%22%20fill%3D%22%23a7cae7%22%3EFirefox%20%2F%20Safari%3C%2Ftext%3E%3Crect%20x%3D%22335%22%20y%3D%22105%22%20width%3D%22230%22%20height%3D%22120%22%20rx%3D%2218%22%20fill%3D%22%230f3156%22%20stroke%3D%22%2391d6ff%22%20stroke-width%3D%222%22%2F%3E%3Ctext%20x%3D%22450%22%20y%3D%22147%22%20font-size%3D%2221%22%3ESearch%20Engine%3C%2Ftext%3E%3Ctext%20x%3D%22450%22%20y%3D%22177%22%20font-size%3D%2215%22%20fill%3D%22%23a7cae7%22%3Eindexes%20%2B%20ranks%20pages%3C%2Ftext%3E%3Ccircle%20cx%3D%22740%22%20cy%3D%22165%22%20r%3D%2272%22%20fill%3D%22%23123e69%22%20stroke%3D%22%2391d6ff%22%20stroke-width%3D%222%22%2F%3E%3Ctext%20x%3D%22740%22%20y%3D%22158%22%20font-size%3D%2222%22%3EWeb%20Pages%3C%2Ftext%3E%3Ctext%20x%3D%22740%22%20y%3D%22187%22%20font-size%3D%2215%22%20fill%3D%22%23a7cae7%22%3Eresults%20you%20open%3C%2Ftext%3E%3Ctext%20x%3D%22252%22%20y%3D%22175%22%20font-size%3D%2242%22%20fill%3D%22%2391d6ff%22%3E%E2%86%92%3C%2Ftext%3E%3Ctext%20x%3D%22625%22%20y%3D%22175%22%20font-size%3D%2242%22%20fill%3D%22%2391d6ff%22%3E%E2%86%92%3C%2Ftext%3E%3Ctext%20x%3D%22450%22%20y%3D%2255%22%20font-size%3D%2223%22%20fill%3D%22%2391d6ff%22%3ESearch%20is%20a%20process%2C%20not%20the%20same%20thing%20as%20the%20browser.%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Diagram comparing a web browser, search engine, and web pages"><span>Browser, search engine, and web pages work together but are not the same thing.</span></div></div><div class="lab3-links"><a href="https://www.cloudflare.com/learning/network-layer/how-does-the-internet-work/" target="_blank" rel="noopener">How the Internet Works</a><a href="https://www.cloudflare.com/learning/access-management/what-is-an-isp/" target="_blank" rel="noopener">What Is an ISP?</a><a href="https://www.mozilla.org/firefox/browsers/" target="_blank" rel="noopener">About Web Browsers</a><a href="https://www.google.com/howsearchworks/" target="_blank" rel="noopener">How Search Works</a></div></div>
+    <div class="lab3-section"><div class="lab3-section-head"><div><div class="reflection-kicker">PART 2</div><h4>Interactive AI Chatbot</h4></div><span class="tag">Ask a question</span></div><div class="lab3-ai-grid"><div class="lab3-tool"><h5>💬 Internet Helper</h5><p>Ask about the Internet, ISPs, browsers, search engines, or this project. The chatbot responds from the site’s built-in knowledge.</p><div class="lab3-chat-log" id="lab3ChatLog"><div class="lab3-chat-msg bot">Hi! Ask me something about Internet technologies or how this Lab 3 website works.</div></div><form class="lab3-chat-form" id="lab3ChatForm"><input id="lab3ChatInput" type="text" placeholder="Ask a question..." autocomplete="off"><button type="submit">Send</button></form><p class="lab3-note">This portfolio uses a lightweight client-side chatbot demo so the page can work as a self-contained project without exposing an API key.</p></div><div class="lab3-tool"><h5>🧠 Sample AI Tasks</h5><ul><li>Explain how a browser differs from a search engine.</li><li>Describe what an ISP does.</li><li>Explain why Internet data is broken into packets.</li><li>Ask for a quick summary of the project.</li></ul><button type="button" id="lab3AskSample">Ask: “What is an ISP?”</button><div class="lab3-person-reply" id="lab3SampleReply">Your answer will appear here.</div></div></div></div>
+    <div class="lab3-section"><div class="lab3-section-head"><div><div class="reflection-kicker">PART 3</div><h4>Interactive AI Digital Person</h4></div><span class="tag">Upload → Generate → Talk</span></div><div class="lab3-ai-grid"><div class="lab3-tool"><h5>👤 Digital Person Generator</h5><p>Upload a photo and generate a stylized digital-person avatar preview directly in the browser.</p><div class="lab3-avatar-preview" id="lab3AvatarStage"><img id="lab3AvatarImage" alt="AI digital person avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStBbUF7-YlYqOD3KXMY4ksoNzY-xh2gr7QdF0te007Bg&s=10"><div id="lab3AvatarEmpty" style="display:none;color:#86a1bc;text-align:center;padding:20px">Upload a photo to begin.</div></div><div class="lab3-upload-row"><input type="file" id="lab3PhotoInput" accept="image/*"><button type="button" id="lab3GenerateAvatar">Generate Digital Person</button></div><p class="lab3-note">Upload a photo to personalize the digital person. When the site is running through its server, questions are sent to a real OpenAI model for full, open-ended responses; voice input/output still uses your browser's microphone and speech features.</p></div><div class="lab3-tool"><h5>🗣 Talk to the Digital Person</h5><p>Use your microphone to speak, or type a question. The digital person uses a real AI model for open-ended answers and can speak the response out loud.</p><div class="lab3-person-chat"><div class="lab3-person-controls"><input id="lab3PersonInput" type="text" placeholder="Ask the digital person something..." autocomplete="off"><button type="button" class="lab3-mic-btn" id="lab3PersonMic" aria-label="Speak to digital person">🎙</button></div><div class="lab3-voice-status" id="lab3VoiceStatus">Click the microphone to start speaking.</div><div class="lab3-person-reply" id="lab3PersonReply">Hello! I can listen to your voice, answer basic questions, and speak my response.</div></div></div></div></div>
+    <div class="lab3-section"><div class="lab3-section-head"><div><div class="reflection-kicker">PROJECT CHECK</div><h4>Lab 3 Complete</h4></div></div><div class="lab3-complete-list"><div class="lab3-check">Internet explained in my own words</div><div class="lab3-check">ISPs explained</div><div class="lab3-check">Browsers explained</div><div class="lab3-check">Search engines explained</div><div class="lab3-check">4 hyperlinks included</div><div class="lab3-check">2 visual diagrams included</div><div class="lab3-check">Interactive chatbot added</div><div class="lab3-check">Photo upload added</div><div class="lab3-check">Digital-person interaction added</div></div></div></div>`,
+};
+function initReflection(){
+  const cards=[...document.querySelectorAll('.reflection-q')];
+  const progressText=document.getElementById('reflectionProgressText');
+  const progressFill=document.getElementById('reflectionProgressFill');
+  const updateProgress=()=>{
+    const read=cards.filter(c=>c.classList.contains('open')).length;
+    if(progressText) progressText.textContent=`${read}/4 read`;
+    if(progressFill) progressFill.style.width=`${read*25}%`;
+  };
+  cards.forEach(card=>card.addEventListener('click',()=>{
+    card.classList.add('open');
+    updateProgress();
+  }));
+  const openAll=document.getElementById('reflectionOpenAll');
+  const closeAll=document.getElementById('reflectionCloseAll');
+  if(openAll) openAll.onclick=(e)=>{e.stopPropagation();cards.forEach(c=>c.classList.add('open'));updateProgress();};
+  if(closeAll) closeAll.onclick=(e)=>{e.stopPropagation();cards.forEach(c=>c.classList.remove('open'));updateProgress();};
+  updateProgress();
+}
+function initLab3(){
+  const chatLog=document.getElementById('lab3ChatLog'),chatForm=document.getElementById('lab3ChatForm'),chatInput=document.getElementById('lab3ChatInput'),sampleBtn=document.getElementById('lab3AskSample'),sampleReply=document.getElementById('lab3SampleReply'),photoInput=document.getElementById('lab3PhotoInput'),generateBtn=document.getElementById('lab3GenerateAvatar'),avatarImage=document.getElementById('lab3AvatarImage'),avatarStage=document.getElementById('lab3AvatarStage'),avatarEmpty=document.getElementById('lab3AvatarEmpty'),personInput=document.getElementById('lab3PersonInput'),personReply=document.getElementById('lab3PersonReply');
+  if(!chatLog||!chatForm||!photoInput||!generateBtn||!avatarImage||!avatarStage)return;
+  const addChat=(text,type)=>{const el=document.createElement('div');el.className='lab3-chat-msg '+type;el.textContent=text;chatLog.appendChild(el);chatLog.scrollTop=chatLog.scrollHeight};
+  const answer=q=>{const l=q.toLowerCase();if(l.includes('isp'))return'An ISP connects a person or organization to the Internet and provides a path to other networks and online services.';if(l.includes('browser'))return'A web browser is the program used to access and display websites, such as Safari, Chrome, Firefox, or Edge.';if(l.includes('search engine'))return'A search engine organizes web pages and returns relevant results when you search. It is different from the browser you use to open those pages.';if(l.includes('packet'))return'Internet data is divided into smaller packets so networks can move pieces of information efficiently toward the destination and reassemble them there.';if(l.includes('internet'))return'Your device sends data through a network connection. Routers help move packets between networks until they reach the server hosting the requested service.';if(l.includes('lab 3')||l.includes('project'))return'Lab 3 combines Internet technology explanations with interactive website features, including a chatbot and a digital-person demo.';return'Try asking me about the Internet, an ISP, a web browser, a search engine, packets, or this project.'};
+  chatForm.onsubmit=e=>{e.preventDefault();const q=chatInput.value.trim();if(!q)return;addChat(q,'user');addChat(answer(q),'bot');chatInput.value='';chatInput.focus()};
+  if(sampleBtn)sampleBtn.onclick=()=>{const q='What is an ISP?';addChat(q,'user');const a=answer(q);addChat(a,'bot');sampleReply.textContent=a};
+  let loadedImage=avatarImage;
+  const providedAvatarUrl='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStBbUF7-YlYqOD3KXMY4ksoNzY-xh2gr7QdF0te007Bg&s=10';
+  const personMic=document.getElementById('lab3PersonMic');
+  const voiceStatus=document.getElementById('lab3VoiceStatus');
+  const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  let recognition=null;
+  let speaking=false;
+  const setAvatarState=state=>{avatarStage.classList.remove('listening','talking');if(state)avatarStage.classList.add(state)};
+  const speakReply=text=>{
+    if(!('speechSynthesis' in window))return;
+    window.speechSynthesis.cancel();
+    const utterance=new SpeechSynthesisUtterance(text);
+    utterance.rate=.98; utterance.pitch=1.04; utterance.volume=1;
+    utterance.onstart=()=>{speaking=true;setAvatarState('talking');if(voiceStatus)voiceStatus.textContent='Speaking...'};
+    utterance.onend=()=>{speaking=false;setAvatarState('');if(voiceStatus)voiceStatus.textContent='Ready for another question.'};
+    utterance.onerror=()=>{speaking=false;setAvatarState('');if(voiceStatus)voiceStatus.textContent='Response shown — voice playback was unavailable.'};
+    window.speechSynthesis.speak(utterance);
+  };
+  let personHistory=[];
+  const respondToPerson=async q=>{
+    const text=q.trim(); if(!text)return;
+    personHistory.push({role:'user',content:text});
+    if(personReply)personReply.textContent='Thinking…';
+    setAvatarState('talking');
+    if(voiceStatus)voiceStatus.textContent='Thinking…';
+    try{
+      const r=await fetch('/api/digital-person',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({messages:personHistory})
+      });
+      const data=await r.json();
+      if(!r.ok)throw new Error(data?.error||`Request failed (${r.status})`);
+      const reply=(data.reply||'').trim()||'I did not get a response. Please try asking again.';
+      personHistory.push({role:'assistant',content:reply});
+      personHistory=personHistory.slice(-20);
+      if(personReply)personReply.textContent=reply;
+      speakReply(reply);
+      if(voiceStatus && !speaking)voiceStatus.textContent='Response ready.';
+      return reply;
+    }catch(err){
+      const fallback=answer(text);
+      if(personReply)personReply.textContent=fallback;
+      if(voiceStatus)voiceStatus.textContent='AI connection unavailable — showing the local demo response.';
+      speakReply(fallback);
+      return fallback;
+    }
+  };
+  avatarImage.src=providedAvatarUrl;
+  avatarImage.onload=()=>{loadedImage=avatarImage;avatarEmpty.style.display='none'};
+  avatarImage.onerror=()=>{avatarImage.removeAttribute('src');avatarEmpty.textContent='Upload a photo to create your digital person.';avatarEmpty.style.display='block'};
+  photoInput.onchange=()=>{const file=photoInput.files&&photoInput.files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{avatarImage.src=reader.result;avatarImage.style.display='block';avatarEmpty.style.display='none';loadedImage=avatarImage;avatarStage.classList.remove('generated');if(voiceStatus)voiceStatus.textContent='Photo loaded. Your digital person is ready.'};reader.readAsDataURL(file)};
+  generateBtn.onclick=()=>{if(!loadedImage||!avatarImage.src){avatarEmpty.textContent='Choose a photo first.';avatarEmpty.style.display='block';return}avatarStage.classList.add('generated');avatarEmpty.style.display='none';if(voiceStatus)voiceStatus.textContent='Digital person generated. Click the microphone to talk.'};
+  if(personInput)personInput.onkeydown=e=>{if(e.key!=='Enter')return;e.preventDefault();respondToPerson(personInput.value);personInput.value=''};
+  if(personMic){
+    if(SpeechRecognition){
+      recognition=new SpeechRecognition();
+      recognition.lang='en-US'; recognition.interimResults=false; recognition.continuous=false;
+      recognition.onstart=()=>{setAvatarState('listening');personMic.classList.add('listening');personMic.textContent='■';if(voiceStatus)voiceStatus.textContent='Listening… speak now.'};
+      recognition.onresult=e=>{const transcript=[...e.results].map(r=>r[0].transcript).join(' ').trim();if(personInput)personInput.value=transcript;if(transcript)respondToPerson(transcript)};
+      recognition.onerror=e=>{setAvatarState('');personMic.classList.remove('listening');personMic.textContent='🎙';if(voiceStatus)voiceStatus.textContent=e.error==='not-allowed'?'Microphone permission was denied.':`Voice input error: ${e.error}.`};
+      recognition.onend=()=>{personMic.classList.remove('listening');personMic.textContent='🎙';if(!speaking)setAvatarState('')};
+      personMic.onclick=()=>{try{if(personMic.classList.contains('listening'))recognition.stop();else recognition.start()}catch(err){if(voiceStatus)voiceStatus.textContent='Please click again to start the microphone.'}};
+    }else{
+      personMic.onclick=()=>{if(voiceStatus)voiceStatus.textContent='Voice input is not available in this browser. Try Chrome or Edge for microphone speech recognition.'};
+    }
+  }
+}
+function openAssignment(index){const a=assignments[index];const statusText=a[3]==='complete'?'Completed':'Work in Progress';const content=document.getElementById('assignmentDetailContent');const details=assignmentDetails[index];content.innerHTML=`<div class="card"><span class="tag">Due ${a[0]}</span><span class="tag">${a[2]}</span><h2 class="section-title" style="margin-top:14px">${a[1]}</h2><p class="subtitle">${statusText}</p>${details || (a[3]==='complete'?'<div class="highlight"><strong>Assignment content</strong><br><span class="empty-note">Your completed assignment will appear here.</span></div>':'<div class="wip-panel"><div class="wip-inner"><span class="wip-label">WORK IN PROGRESS</span><h3>This assignment is not posted yet.</h3><p>Send me the assignment instructions or your completed work, and I will place it on this page.</p></div></div>')}</div>`;showPage('assignment-detail');if(index===1)initReflection();if(index===2)initLab3()}
+function buildSiteMapLines(){
+  const map=document.getElementById('zigzagMap');
+  const svg=document.getElementById('mapLines');
+  if(!map||!svg)return;
+  const nodes=[...map.querySelectorAll('.map-node')];
+  const rect=map.getBoundingClientRect();
+  const width=Math.max(1,rect.width);
+  const height=Math.max(1,rect.height);
+  svg.setAttribute('viewBox',`0 0 ${width} ${height}`);
+  svg.setAttribute('width',width);
+  svg.setAttribute('height',height);
+  svg.style.display='block';
+  svg.innerHTML='';
+  nodes.slice(0,-1).forEach((node,i)=>{
+    const next=nodes[i+1];
+    const a=node.getBoundingClientRect();
+    const b=next.getBoundingClientRect();
+    const x1=a.left+a.width/2-rect.left;
+    const y1=a.top+a.height/2-rect.top;
+    const x2=b.left+b.width/2-rect.left;
+    const y2=b.top+b.height/2-rect.top;
+    const line=document.createElementNS('http://www.w3.org/2000/svg','line');
+    line.setAttribute('x1',x1); line.setAttribute('y1',y1);
+    line.setAttribute('x2',x2); line.setAttribute('y2',y2);
+    svg.appendChild(line);
+  });
+}
+function startMapPulse(){}
+function refreshSiteMap(){buildSiteMapLines();}
+const sidebar=document.getElementById('sidebar'),overlay=document.getElementById('overlay');function closeMenu(){sidebar.classList.remove('open');overlay.classList.remove('show')}document.getElementById('menuBtn').onclick=()=>{sidebar.classList.toggle('open');overlay.classList.toggle('show')};document.getElementById('closeBtn').onclick=closeMenu;overlay.onclick=closeMenu;
+function showPage(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));const active=[...document.querySelectorAll('.nav button')].find(b=>b.getAttribute('onclick')===`showPage('${id}')`);if(active)active.classList.add('active');const compact=['ai','contact','assignments','assignment-detail'].includes(id);document.querySelector('.page').classList.toggle('ai-view',id==='ai');document.querySelector('.page').classList.toggle('compact-view',compact);closeMenu();window.scrollTo({top:0,behavior:'smooth'})}
+function goToSiteMap(){const home=document.getElementById('home');document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));home.classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));const target=[...document.querySelectorAll('.nav button')].find(b=>b.getAttribute('onclick')===`goToSiteMap()`);if(target)target.classList.add('active');closeMenu();setTimeout(()=>document.getElementById('homeSiteMap').scrollIntoView({behavior:'smooth',block:'start'}),20)}
+
+
+// Security tabs
+const securityTabs=[...document.querySelectorAll('.security-tab')];
+const securityPanels=[...document.querySelectorAll('.security-panel')];
+securityTabs.forEach(tab=>tab.addEventListener('click',()=>{
+  const id=tab.dataset.securityTab;
+  securityTabs.forEach(t=>{const active=t===tab;t.classList.toggle('active',active);t.setAttribute('aria-selected',active?'true':'false')});
+  securityPanels.forEach(panel=>{const active=panel.dataset.securityPanel===id;panel.classList.toggle('active',active);panel.hidden=!active});
+}));
+
+// Security drag-and-drop quiz
+const quizData=[
+  {text:'Phishing',group:'threats'},
+  {text:'Social engineering',group:'threats'},
+  {text:'Malware',group:'threats'},
+  {text:'Suspicious links or downloads',group:'threats'},
+  {text:'Strong unique passwords',group:'protect'},
+  {text:'Multi-factor authentication',group:'protect'},
+  {text:'Review privacy settings',group:'protect'},
+  {text:'Watch login alerts',group:'protect'},
+  {text:'Respect copyright',group:'ethics'},
+  {text:'Give credit for others\' work',group:'ethics'},
+  {text:'Communicate respectfully online',group:'ethics'},
+  {text:'Use AI responsibly',group:'ethics'}
+];
+const securityQuiz=document.getElementById('securityQuiz');
+const startSecurityQuiz=document.getElementById('startSecurityQuiz');
+const resetSecurityQuiz=document.getElementById('resetSecurityQuiz');
+const securityQuizTray=document.getElementById('securityQuizTray');
+const securityQuizResult=document.getElementById('securityQuizResult');
+function shuffle(arr){return [...arr].sort(()=>Math.random()-0.5)}
+function launchQuizConfetti(){
+  const colors=['#91d6ff','#ffffff','#5ee1a0','#f5d06f','#ff7c8a'];
+  const count=90;
+  const wrap=document.createDocumentFragment();
+  for(let i=0;i<count;i++){
+    const piece=document.createElement('span');
+    piece.className='confetti-piece';
+    piece.style.setProperty('--x', `${Math.random()*100}vw`);
+    piece.style.setProperty('--w', `${6+Math.random()*7}px`);
+    piece.style.setProperty('--h', `${10+Math.random()*11}px`);
+    piece.style.setProperty('--r', Math.random()>.72?'50%':'2px');
+    piece.style.setProperty('--c', colors[i%colors.length]);
+    piece.style.setProperty('--duration', `${2.8+Math.random()*2.2}s`);
+    piece.style.setProperty('--delay', `${Math.random()*0.55}s`);
+    piece.style.setProperty('--drift', `${-140+Math.random()*280}px`);
+    piece.style.setProperty('--spin', `${360+Math.random()*720}deg`);
+    wrap.appendChild(piece);
+    setTimeout(()=>piece.remove(),5200);
+  }
+  document.body.appendChild(wrap);
+}
+function renderQuiz(){
+  document.querySelectorAll('.target-dropzone').forEach(z=>z.innerHTML='');
+  securityQuizTray.innerHTML=''; securityQuizResult.textContent=''; securityQuizResult.className='quiz-result';
+  shuffle(quizData).forEach((item,i)=>{
+    const chip=document.createElement('div');chip.className='quiz-chip quiz-drop-fall';chip.draggable=true;chip.textContent=item.text;chip.dataset.group=item.group;chip.dataset.id='q'+i;chip.style.animationDelay=(i*55)+'ms';
+    chip.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',chip.dataset.id);chip.classList.remove('wrong')});
+    securityQuizTray.appendChild(chip);
+  });
+  document.querySelectorAll('.quiz-target').forEach(target=>{
+    target.ondragover=e=>{e.preventDefault();target.classList.add('hovering')};
+    target.ondragleave=()=>target.classList.remove('hovering');
+    target.ondrop=e=>{
+      e.preventDefault();target.classList.remove('hovering');
+      const id=e.dataTransfer.getData('text/plain');const chip=document.querySelector('.quiz-chip[data-id="'+id+'"]');if(!chip)return;
+      const ok=chip.dataset.group===target.dataset.answerGroup;
+      target.classList.remove('good','bad');void target.offsetWidth;target.classList.add(ok?'good':'bad');
+      chip.classList.remove('correct','wrong');void chip.offsetWidth;chip.classList.add(ok?'correct':'wrong');
+      if(ok){target.querySelector('.target-dropzone').appendChild(chip);chip.draggable=false;setTimeout(()=>{target.classList.remove('good');chip.classList.remove('correct')},800)}
+      else{setTimeout(()=>{chip.classList.remove('wrong');target.classList.remove('bad')},850)}
+      const remaining=[...document.querySelectorAll('.quiz-chip')].some(c=>c.parentElement===securityQuizTray);
+      if(!remaining){
+        securityQuizResult.textContent='Nice work — you matched every security idea correctly!';
+        securityQuizResult.className='quiz-result done';
+        launchQuizConfetti();
+      }
+    };
+  });
+}
+function openSecurityQuiz(){securityQuiz.hidden=false;document.body.classList.add('screen-shake');setTimeout(()=>document.body.classList.remove('screen-shake'),760);renderQuiz();setTimeout(()=>securityQuiz.scrollIntoView({behavior:'smooth',block:'start'}),180)}
+startSecurityQuiz.addEventListener('click',openSecurityQuiz);resetSecurityQuiz.addEventListener('click',renderQuiz);
+// Website Assistant: basic local functions (no live AI/API required)
+const aiChatBubble=document.getElementById('aiChatBubble');
+const aiChatWindow=document.getElementById('aiChatWindow');
+const aiChatClose=document.getElementById('aiChatClose');
+const aiChatMessages=document.getElementById('aiChatMessages');
+const aiChatForm=document.getElementById('aiChatForm');
+const aiChatInput=document.getElementById('aiChatInput');
+const aiQuick=[...document.querySelectorAll('.ai-chip')];
+function toggleAssistant(open){aiChatWindow.classList.toggle('open',open);if(open)setTimeout(()=>aiChatInput.focus(),80)}
+aiChatBubble.onclick=()=>toggleAssistant(!aiChatWindow.classList.contains('open'));
+aiChatClose.onclick=()=>toggleAssistant(false);
+function addAiMessage(text,type='bot'){const el=document.createElement('div');el.className='ai-msg '+type;el.textContent=text;aiChatMessages.appendChild(el);aiChatMessages.scrollTop=aiChatMessages.scrollHeight}
+function navLabel(id){return ({home:'Home',about:'About Me',education:'Education',skills:'Skills',projects:'Projects',assignments:'Assignments',security:'Security',ai:'AI',contact:'Contact'})[id]||id}
+function currentSection(){const active=document.querySelector('.section.active');return active?active.id:'home'}
+function showAssistantResponse(text){
+  const lower=text.toLowerCase();
+  const sectionInfo={
+    home:'Home is the starting point of the portfolio. It introduces the semester project, explains that the site documents my CS 125 learning journey, and provides the Site Map and assignment access.',
+    about:'The About Me tab is meant to introduce the person behind the portfolio. It is reserved for background, interests, goals, and other personal information that helps visitors understand who created the site.',
+    education:'The Education tab is for academic background and relevant coursework. It gives visitors context about the student and how CS 125 fits into the overall education experience.',
+    skills:'The Skills tab is designed to show technical and professional skills developed through the course. It can grow as new chapters and labs teach new concepts.',
+    projects:'The Projects tab is meant to showcase larger work completed during CS 125. It gives visitors a place to see what was built or completed instead of only reading about the course.',
+    assignments:'The Assignments tab is the semester timeline. Each assignment can be clicked to open its own page, and completed work will be added there as it is provided.',
+    security:'The Security tab is for digital security, passwords, safe browsing, online ethics, privacy habits, and responsible digital behavior. It will be expanded when the class reaches Chapter 5.',
+    ai:'The AI tab is for artificial intelligence concepts, uses, benefits, limitations, and responsible use. It will be expanded when the class reaches Chapter 14.',
+    contact:'The Contact tab is reserved for professional contact information once the portfolio is finalized.'
+  };
+  const routeDefs=[
+    {id:'home',keys:['home','homepage','main page']},{id:'about',keys:['about me','about']},{id:'education',keys:['education','school','college']},{id:'skills',keys:['skills']},{id:'projects',keys:['projects','project']},{id:'assignments',keys:['assignments','labs','lab']},{id:'security',keys:['security','cybersecurity','ethics']},{id:'ai',keys:['artificial intelligence','ai section','ai']},{id:'contact',keys:['contact','email']}
+  ];
+  const found=routeDefs.find(r=>r.keys.some(k=>lower.includes(k)));
+  if(/site map|sitemap/.test(lower)){goToSiteMap();return 'The Site Map is right below the main introduction. I took you there so you can choose a section.';}
+  if(/take me|go to|open|bring me|navigate|show me/.test(lower) && found){showPage(found.id);return `Opening the ${navLabel(found.id)} tab.`;}
+  if(/where (is|are)|find/.test(lower) && found){showPage(found.id);return `The ${navLabel(found.id)} tab is available in the left menu and the Site Map. I opened it for you.`;}
+  if(/what can you do|help|how do i use you/.test(lower)) return 'I can navigate the tabs, explain what a tab is for, give more detail about a section, explain why the portfolio was created, explain how the website was built, describe the assignments, and point you to the Site Map.';
+  if(/how (was|is) (this )?(website|site)|how did you build|how was it made/.test(lower)) return 'This portfolio is built with HTML for the page structure, CSS for the navy/light-blue design and layout, and JavaScript for navigation, clickable assignments, the Site Map, the slide-out menu, and this helper chat. It is designed as one semester-long website that can grow as new assignments are added.';
+  if(/why (was|is) (this )?(website|site) (made|created)|purpose|why make/.test(lower)) return 'The portfolio was created to document the CS 125 semester and demonstrate what I am learning about digital citizenship, the internet, hardware, software, security, storage, operating systems, networking, databases, programming, web development, technology careers, and AI.';
+  if(/extra info|more detail|explain|tell me more|what is this tab|what does this tab do|what is (the )?(page|tab) for/.test(lower)) {
+    const id=found?found.id:currentSection();
+    return sectionInfo[id] || sectionInfo.home;
+  }
+  if(/assignment|lab/.test(lower)) return 'The Assignments tab tracks the semester labs and chapters. Each assignment card is clickable, so later we can place the actual assignment content on its own page.';
+  if(/next due|due/.test(lower)) return 'The current schedule follows the Monday cadence you gave me. Lab 2 is due September 21, 2026, and the following labs continue on Mondays.';
+  if(/site|portfolio/.test(lower)) return 'This is Sadi’s Digital Citizenship Portfolio for CS 125. Use the left menu or Site Map to move through it.';
+  if(/^(hi|hello|hey|yo)\b/.test(lower)) return 'Hey! What would you like help with on the site?';
+  if(/thank(s| you)/.test(lower)) return 'You got it!';
+  return 'I can help with the website itself. Try asking me to take you to a tab, explain a tab, explain the purpose of the page, explain how the site was made, or tell you more about an assignment or section.';
+}
+function sendAssistantMessage(message){
+  const text=String(message||'').trim();
+  if(!text)return;
+  addAiMessage(text,'user');
+  const typing=document.createElement('div');typing.className='ai-msg bot typing';typing.textContent='Thinking…';aiChatMessages.appendChild(typing);aiChatMessages.scrollTop=aiChatMessages.scrollHeight;
+  setTimeout(()=>{typing.remove();addAiMessage(showAssistantResponse(text),'bot')},260);
+}
+aiChatForm.addEventListener('submit',e=>{e.preventDefault();const v=aiChatInput.value;aiChatInput.value='';sendAssistantMessage(v)});
+aiQuick.forEach(b=>b.addEventListener('click',()=>sendAssistantMessage(b.dataset.msg)));
+</script>
+</body>
+</html>
